@@ -17,6 +17,14 @@
 		B9F5033C29CCDFCE00B7D13C /* SpoonacularAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5033B29CCDFCE00B7D13C /* SpoonacularAppUITests.swift */; };
 		B9F5033E29CCDFCE00B7D13C /* SpoonacularAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5033D29CCDFCE00B7D13C /* SpoonacularAppUITestsLaunchTests.swift */; };
 		B9F5034C29CCF5AB00B7D13C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B9F5034B29CCF5AB00B7D13C /* Alamofire */; };
+		B9F5034F29CCF6D200B7D13C /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5034E29CCF6D200B7D13C /* WebService.swift */; };
+		B9F5035429CCFF8E00B7D13C /* String+Escaped.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5035329CCFF8E00B7D13C /* String+Escaped.swift */; };
+		B9F5035729CD040800B7D13C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5035629CD040800B7D13C /* Utils.swift */; };
+		B9F5035C29CD0CF500B7D13C /* BaseEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5035B29CD0CF500B7D13C /* BaseEndpoint.swift */; };
+		B9F5035E29CD0E6D00B7D13C /* AllRecipesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5035D29CD0E6D00B7D13C /* AllRecipesEndpoint.swift */; };
+		B9F5036029CD100300B7D13C /* ImageRecipeEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5035F29CD100300B7D13C /* ImageRecipeEndpoint.swift */; };
+		B9F5036229CD21B700B7D13C /* DetailedRecipeEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5036129CD21B700B7D13C /* DetailedRecipeEndpoint.swift */; };
+		B9F5036429CD24F200B7D13C /* FilteredRecipeEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5036329CD24F200B7D13C /* FilteredRecipeEndpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +58,14 @@
 		B9F5033729CCDFCE00B7D13C /* SpoonacularAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpoonacularAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9F5033B29CCDFCE00B7D13C /* SpoonacularAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularAppUITests.swift; sourceTree = "<group>"; };
 		B9F5033D29CCDFCE00B7D13C /* SpoonacularAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B9F5034E29CCF6D200B7D13C /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		B9F5035329CCFF8E00B7D13C /* String+Escaped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Escaped.swift"; sourceTree = "<group>"; };
+		B9F5035629CD040800B7D13C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		B9F5035B29CD0CF500B7D13C /* BaseEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEndpoint.swift; sourceTree = "<group>"; };
+		B9F5035D29CD0E6D00B7D13C /* AllRecipesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipesEndpoint.swift; sourceTree = "<group>"; };
+		B9F5035F29CD100300B7D13C /* ImageRecipeEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRecipeEndpoint.swift; sourceTree = "<group>"; };
+		B9F5036129CD21B700B7D13C /* DetailedRecipeEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedRecipeEndpoint.swift; sourceTree = "<group>"; };
+		B9F5036329CD24F200B7D13C /* FilteredRecipeEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredRecipeEndpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +117,9 @@
 		B9F5031929CCDFCC00B7D13C /* SpoonacularApp */ = {
 			isa = PBXGroup;
 			children = (
+				B9F5035529CD03FD00B7D13C /* Constants */,
+				B9F5035229CCFF7E00B7D13C /* Extension */,
+				B9F5034D29CCF6C300B7D13C /* Network */,
 				B9F5031A29CCDFCC00B7D13C /* AppDelegate.swift */,
 				B9F5031C29CCDFCC00B7D13C /* SceneDelegate.swift */,
 				B9F5031E29CCDFCC00B7D13C /* ViewController.swift */,
@@ -127,6 +146,43 @@
 				B9F5033D29CCDFCE00B7D13C /* SpoonacularAppUITestsLaunchTests.swift */,
 			);
 			path = SpoonacularAppUITests;
+			sourceTree = "<group>";
+		};
+		B9F5034D29CCF6C300B7D13C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B9F5034E29CCF6D200B7D13C /* WebService.swift */,
+				B9F5035A29CD0CE500B7D13C /* Endpoints */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		B9F5035229CCFF7E00B7D13C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B9F5035329CCFF8E00B7D13C /* String+Escaped.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		B9F5035529CD03FD00B7D13C /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				B9F5035629CD040800B7D13C /* Utils.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		B9F5035A29CD0CE500B7D13C /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				B9F5035B29CD0CF500B7D13C /* BaseEndpoint.swift */,
+				B9F5035D29CD0E6D00B7D13C /* AllRecipesEndpoint.swift */,
+				B9F5035F29CD100300B7D13C /* ImageRecipeEndpoint.swift */,
+				B9F5036129CD21B700B7D13C /* DetailedRecipeEndpoint.swift */,
+				B9F5036329CD24F200B7D13C /* FilteredRecipeEndpoint.swift */,
+			);
+			path = Endpoints;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,9 +322,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9F5036029CD100300B7D13C /* ImageRecipeEndpoint.swift in Sources */,
+				B9F5035429CCFF8E00B7D13C /* String+Escaped.swift in Sources */,
+				B9F5035C29CD0CF500B7D13C /* BaseEndpoint.swift in Sources */,
 				B9F5031F29CCDFCC00B7D13C /* ViewController.swift in Sources */,
 				B9F5031B29CCDFCC00B7D13C /* AppDelegate.swift in Sources */,
+				B9F5034F29CCF6D200B7D13C /* WebService.swift in Sources */,
 				B9F5031D29CCDFCC00B7D13C /* SceneDelegate.swift in Sources */,
+				B9F5036229CD21B700B7D13C /* DetailedRecipeEndpoint.swift in Sources */,
+				B9F5035E29CD0E6D00B7D13C /* AllRecipesEndpoint.swift in Sources */,
+				B9F5035729CD040800B7D13C /* Utils.swift in Sources */,
+				B9F5036429CD24F200B7D13C /* FilteredRecipeEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

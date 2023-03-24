@@ -11,6 +11,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let filtered = FilteredRecipeEndpoint(search: "pasta").getURL()
+        print(filtered)
         // Do any additional setup after loading the view.
     }
 
