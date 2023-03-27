@@ -7,14 +7,27 @@
 
 import Foundation
 
-class AllRecipesSearch: BaseEndpoint {
+class AllRecipesEndpoint: BaseEndpoint {
     
     struct Constants {
         static let allRecipesPath = "/recipes/complexSearch"
+      
+        struct Keys {
+            static let offsetKey = "offset"
+            static let maximumNumberKey = "number"
+        }
     }
     
-    init(){
-        super.init(path: Constants.allRecipesPath, httpMethod: .get)
+    init(offset: Int, number: Int) throws {
+        
+        guard offset >= 0, number >= 0 else {
+            throw EndpointError.invalidSearchBoundaries
+        }
+        
+        let offset = URLQueryItem(name: Constants.Keys.offsetKey, value: String(offset))
+        let maxNumber = URLQueryItem(name: Constants.Keys.maximumNumberKey, value: String(number))
+        let queryItems = [offset, maxNumber]
+        super.init(path: Constants.allRecipesPath, queryItems: queryItems )
     }
     
 }

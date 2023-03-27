@@ -8,7 +8,6 @@
 import Alamofire
 import Foundation
 
-
 struct Resource<T> {
     let url: URL
     var httpMethod: HTTPMethod
@@ -18,9 +17,15 @@ struct Resource<T> {
 
 final class WebService {
     
+    private let manager: Session
+    
+    init(manager: Session = Session.default) {
+        self.manager = manager
+    }
+    
     func load<T>(resource: Resource<T>, completion: @escaping (T?)-> ()) {
         
-        AF.request(resource.url, method: resource.httpMethod, parameters: nil, encoding: URLEncoding.default, headers: resource.httpHeaders, interceptor: nil).response {
+        manager.request(resource.url, method: resource.httpMethod, parameters: nil, encoding: URLEncoding.default, headers: resource.httpHeaders, interceptor: nil).response {
             
             response in
             

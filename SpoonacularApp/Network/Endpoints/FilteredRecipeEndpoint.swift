@@ -18,8 +18,11 @@ class FilteredRecipeEndpoint: BaseEndpoint {
         
     }
         
-    init(search keywords: String){
-        let queryItem =  URLQueryItem(name: Constants.Keys.queryKey, value: keywords.escaped())
+    init(search keywords: String) throws {
+        guard keywords != "" else {
+            throw EndpointError.emptySearch
+        }
+        let queryItem =  URLQueryItem(name: Constants.Keys.queryKey, value: String(describing: keywords))
         super.init(path: Constants.Keys.path, queryItems: [queryItem], httpMethod: .get)
     }
     

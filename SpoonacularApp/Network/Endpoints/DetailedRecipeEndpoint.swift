@@ -17,7 +17,12 @@ class DetailedRecipeEndpoint: BaseEndpoint {
         
     }
     
-    init(recipeID: Int, includeNutrition: Bool){
+    init(recipeID: Int, includeNutrition: Bool = false) throws {
+        
+        guard recipeID >= 0 else {
+            throw EndpointError.invalidSearchID
+        }
+        
         let path = "/recipes/\(recipeID)/information"
         let queryItem = URLQueryItem(name: Constants.Keys.includeNutrition, value: String(includeNutrition))
         super.init(path: path, queryItems: [queryItem], httpMethod: .get)

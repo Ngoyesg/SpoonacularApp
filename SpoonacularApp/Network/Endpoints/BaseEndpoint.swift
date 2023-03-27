@@ -11,33 +11,30 @@ import Alamofire
 class BaseEndpoint {
     
     private var scheme: String = "https"
-    private var host: String = "api.spoonacular.com"
+    private var host: String
     private var path: String
     private var queryItems: [URLQueryItem]
-    private var httpMethod: HTTPMethod = .get
+    private var httpMethod: HTTPMethod
     private let authKey = URLQueryItem(name: "apiKey", value: Constants.apiKey)
     
-    init(path: String, queryItems: [URLQueryItem] = [], httpMethod: HTTPMethod) {
+    init(host: String = "api.spoonacular.com", path: String, queryItems: [URLQueryItem] = [], httpMethod: HTTPMethod = .get) {
+        self.host = host
         self.path = path
-        self.queryItems = queryItems
+        self.queryItems = [authKey]
+        self.queryItems += queryItems
         self.httpMethod = httpMethod
-        self.queryItems.append(authKey)
     }
     
-    init(with url: String) {
-        let components = URLComponents()
-        let urlToDecompose = URL(string: url)
-        self.path = components.url(relativeTo: urlToDecompose)!.path
-        self.queryItems = [authKey]
-        self.httpMethod = .get
-    }
-        
-    func getURL() -> URL? {
+    func getURL() throws -> URL {
         var components = URLComponents()
         components.scheme = self.scheme
         components.host = self.host
         components.path = self.path
         components.queryItems = self.queryItems
-        return components.url
+        
+        guard let url = components.url else {
+            throw EndpointError.invalidURL
+        }
+        return url
     }
 }

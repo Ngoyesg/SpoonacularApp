@@ -7,18 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B946E47D29CFA0C700315FF2 /* AllRecipesEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946E47C29CFA0C700315FF2 /* AllRecipesEndpointTests.swift */; };
+		B946E48129CFA80D00315FF2 /* FilteredRecipeEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946E48029CFA80D00315FF2 /* FilteredRecipeEndpointTests.swift */; };
+		B946E48329CFBF3F00315FF2 /* EndpointError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946E48229CFBF3F00315FF2 /* EndpointError.swift */; };
+		B946E48529CFC54100315FF2 /* ImageRecipeEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946E48429CFC54100315FF2 /* ImageRecipeEndpointTests.swift */; };
+		B946E48729D0A57700315FF2 /* DetailedRecipeEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946E48629D0A57700315FF2 /* DetailedRecipeEndpointTests.swift */; };
+		B946E48929D0E96C00315FF2 /* URLDecomposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946E48829D0E96C00315FF2 /* URLDecomposer.swift */; };
+		B946E48D29D0ED4B00315FF2 /* MockURLDecomposerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946E48C29D0ED4B00315FF2 /* MockURLDecomposerProtocol.swift */; };
+		B946E48F29D0F09100315FF2 /* BaseEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946E48E29D0F09100315FF2 /* BaseEndpointTests.swift */; };
+		B946E49229D0F7D300315FF2 /* URLDecomposerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946E49129D0F7D300315FF2 /* URLDecomposerTests.swift */; };
+		B946E49429D0F9BC00315FF2 /* DecomposedURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946E49329D0F9BC00315FF2 /* DecomposedURL.swift */; };
+		B946E49729D0FBF900315FF2 /* WebServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946E49629D0FBF900315FF2 /* WebServiceTests.swift */; };
+		B946E49929D0FFF800315FF2 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946E49829D0FFF700315FF2 /* MockURLProtocol.swift */; };
 		B9F5031B29CCDFCC00B7D13C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5031A29CCDFCC00B7D13C /* AppDelegate.swift */; };
 		B9F5031D29CCDFCC00B7D13C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5031C29CCDFCC00B7D13C /* SceneDelegate.swift */; };
 		B9F5031F29CCDFCC00B7D13C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5031E29CCDFCC00B7D13C /* ViewController.swift */; };
 		B9F5032229CCDFCC00B7D13C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9F5032029CCDFCC00B7D13C /* Main.storyboard */; };
 		B9F5032429CCDFCE00B7D13C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9F5032329CCDFCE00B7D13C /* Assets.xcassets */; };
 		B9F5032729CCDFCE00B7D13C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9F5032529CCDFCE00B7D13C /* LaunchScreen.storyboard */; };
-		B9F5033229CCDFCE00B7D13C /* SpoonacularAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5033129CCDFCE00B7D13C /* SpoonacularAppTests.swift */; };
 		B9F5033C29CCDFCE00B7D13C /* SpoonacularAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5033B29CCDFCE00B7D13C /* SpoonacularAppUITests.swift */; };
 		B9F5033E29CCDFCE00B7D13C /* SpoonacularAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5033D29CCDFCE00B7D13C /* SpoonacularAppUITestsLaunchTests.swift */; };
 		B9F5034C29CCF5AB00B7D13C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B9F5034B29CCF5AB00B7D13C /* Alamofire */; };
 		B9F5034F29CCF6D200B7D13C /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5034E29CCF6D200B7D13C /* WebService.swift */; };
-		B9F5035429CCFF8E00B7D13C /* String+Escaped.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5035329CCFF8E00B7D13C /* String+Escaped.swift */; };
 		B9F5035729CD040800B7D13C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5035629CD040800B7D13C /* Utils.swift */; };
 		B9F5035C29CD0CF500B7D13C /* BaseEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5035B29CD0CF500B7D13C /* BaseEndpoint.swift */; };
 		B9F5035E29CD0E6D00B7D13C /* AllRecipesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F5035D29CD0E6D00B7D13C /* AllRecipesEndpoint.swift */; };
@@ -45,6 +55,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B946E47C29CFA0C700315FF2 /* AllRecipesEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipesEndpointTests.swift; sourceTree = "<group>"; };
+		B946E48029CFA80D00315FF2 /* FilteredRecipeEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredRecipeEndpointTests.swift; sourceTree = "<group>"; };
+		B946E48229CFBF3F00315FF2 /* EndpointError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointError.swift; sourceTree = "<group>"; };
+		B946E48429CFC54100315FF2 /* ImageRecipeEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRecipeEndpointTests.swift; sourceTree = "<group>"; };
+		B946E48629D0A57700315FF2 /* DetailedRecipeEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedRecipeEndpointTests.swift; sourceTree = "<group>"; };
+		B946E48829D0E96C00315FF2 /* URLDecomposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLDecomposer.swift; sourceTree = "<group>"; };
+		B946E48C29D0ED4B00315FF2 /* MockURLDecomposerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLDecomposerProtocol.swift; sourceTree = "<group>"; };
+		B946E48E29D0F09100315FF2 /* BaseEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEndpointTests.swift; sourceTree = "<group>"; };
+		B946E49129D0F7D300315FF2 /* URLDecomposerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLDecomposerTests.swift; sourceTree = "<group>"; };
+		B946E49329D0F9BC00315FF2 /* DecomposedURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecomposedURL.swift; sourceTree = "<group>"; };
+		B946E49629D0FBF900315FF2 /* WebServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceTests.swift; sourceTree = "<group>"; };
+		B946E49829D0FFF700315FF2 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		B9F5031729CCDFCC00B7D13C /* SpoonacularApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpoonacularApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9F5031A29CCDFCC00B7D13C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9F5031C29CCDFCC00B7D13C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,12 +76,10 @@
 		B9F5032629CCDFCE00B7D13C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9F5032829CCDFCE00B7D13C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9F5032D29CCDFCE00B7D13C /* SpoonacularAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpoonacularAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9F5033129CCDFCE00B7D13C /* SpoonacularAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularAppTests.swift; sourceTree = "<group>"; };
 		B9F5033729CCDFCE00B7D13C /* SpoonacularAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpoonacularAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9F5033B29CCDFCE00B7D13C /* SpoonacularAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularAppUITests.swift; sourceTree = "<group>"; };
 		B9F5033D29CCDFCE00B7D13C /* SpoonacularAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B9F5034E29CCF6D200B7D13C /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
-		B9F5035329CCFF8E00B7D13C /* String+Escaped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Escaped.swift"; sourceTree = "<group>"; };
 		B9F5035629CD040800B7D13C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		B9F5035B29CD0CF500B7D13C /* BaseEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEndpoint.swift; sourceTree = "<group>"; };
 		B9F5035D29CD0E6D00B7D13C /* AllRecipesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipesEndpoint.swift; sourceTree = "<group>"; };
@@ -94,6 +114,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B946E47929CE1FED00315FF2 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B946E49629D0FBF900315FF2 /* WebServiceTests.swift */,
+				B946E48B29D0ED2000315FF2 /* Mocks */,
+				B946E49529D0FBDC00315FF2 /* Endpoints */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		B946E48A29D0E97000315FF2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B946E48829D0E96C00315FF2 /* URLDecomposer.swift */,
+				B946E49329D0F9BC00315FF2 /* DecomposedURL.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		B946E48B29D0ED2000315FF2 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B946E48C29D0ED4B00315FF2 /* MockURLDecomposerProtocol.swift */,
+				B946E49829D0FFF700315FF2 /* MockURLProtocol.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		B946E49029D0F7C300315FF2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B946E49129D0F7D300315FF2 /* URLDecomposerTests.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B946E49529D0FBDC00315FF2 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				B946E48E29D0F09100315FF2 /* BaseEndpointTests.swift */,
+				B946E47C29CFA0C700315FF2 /* AllRecipesEndpointTests.swift */,
+				B946E48429CFC54100315FF2 /* ImageRecipeEndpointTests.swift */,
+				B946E48629D0A57700315FF2 /* DetailedRecipeEndpointTests.swift */,
+				B946E48029CFA80D00315FF2 /* FilteredRecipeEndpointTests.swift */,
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
 		B9F5030E29CCDFCC00B7D13C = {
 			isa = PBXGroup;
 			children = (
@@ -117,8 +185,8 @@
 		B9F5031929CCDFCC00B7D13C /* SpoonacularApp */ = {
 			isa = PBXGroup;
 			children = (
+				B946E48A29D0E97000315FF2 /* Extensions */,
 				B9F5035529CD03FD00B7D13C /* Constants */,
-				B9F5035229CCFF7E00B7D13C /* Extension */,
 				B9F5034D29CCF6C300B7D13C /* Network */,
 				B9F5031A29CCDFCC00B7D13C /* AppDelegate.swift */,
 				B9F5031C29CCDFCC00B7D13C /* SceneDelegate.swift */,
@@ -134,7 +202,8 @@
 		B9F5033029CCDFCE00B7D13C /* SpoonacularAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				B9F5033129CCDFCE00B7D13C /* SpoonacularAppTests.swift */,
+				B946E49029D0F7C300315FF2 /* Extensions */,
+				B946E47929CE1FED00315FF2 /* Network */,
 			);
 			path = SpoonacularAppTests;
 			sourceTree = "<group>";
@@ -157,14 +226,6 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		B9F5035229CCFF7E00B7D13C /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				B9F5035329CCFF8E00B7D13C /* String+Escaped.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
 		B9F5035529CD03FD00B7D13C /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +237,7 @@
 		B9F5035A29CD0CE500B7D13C /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
+				B946E48229CFBF3F00315FF2 /* EndpointError.swift */,
 				B9F5035B29CD0CF500B7D13C /* BaseEndpoint.swift */,
 				B9F5035D29CD0E6D00B7D13C /* AllRecipesEndpoint.swift */,
 				B9F5035F29CD100300B7D13C /* ImageRecipeEndpoint.swift */,
@@ -323,12 +385,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9F5036029CD100300B7D13C /* ImageRecipeEndpoint.swift in Sources */,
-				B9F5035429CCFF8E00B7D13C /* String+Escaped.swift in Sources */,
 				B9F5035C29CD0CF500B7D13C /* BaseEndpoint.swift in Sources */,
 				B9F5031F29CCDFCC00B7D13C /* ViewController.swift in Sources */,
+				B946E49429D0F9BC00315FF2 /* DecomposedURL.swift in Sources */,
+				B946E48929D0E96C00315FF2 /* URLDecomposer.swift in Sources */,
 				B9F5031B29CCDFCC00B7D13C /* AppDelegate.swift in Sources */,
 				B9F5034F29CCF6D200B7D13C /* WebService.swift in Sources */,
 				B9F5031D29CCDFCC00B7D13C /* SceneDelegate.swift in Sources */,
+				B946E48329CFBF3F00315FF2 /* EndpointError.swift in Sources */,
 				B9F5036229CD21B700B7D13C /* DetailedRecipeEndpoint.swift in Sources */,
 				B9F5035E29CD0E6D00B7D13C /* AllRecipesEndpoint.swift in Sources */,
 				B9F5035729CD040800B7D13C /* Utils.swift in Sources */,
@@ -340,7 +404,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9F5033229CCDFCE00B7D13C /* SpoonacularAppTests.swift in Sources */,
+				B946E48729D0A57700315FF2 /* DetailedRecipeEndpointTests.swift in Sources */,
+				B946E48529CFC54100315FF2 /* ImageRecipeEndpointTests.swift in Sources */,
+				B946E49729D0FBF900315FF2 /* WebServiceTests.swift in Sources */,
+				B946E49929D0FFF800315FF2 /* MockURLProtocol.swift in Sources */,
+				B946E48129CFA80D00315FF2 /* FilteredRecipeEndpointTests.swift in Sources */,
+				B946E49229D0F7D300315FF2 /* URLDecomposerTests.swift in Sources */,
+				B946E48D29D0ED4B00315FF2 /* MockURLDecomposerProtocol.swift in Sources */,
+				B946E48F29D0F09100315FF2 /* BaseEndpointTests.swift in Sources */,
+				B946E47D29CFA0C700315FF2 /* AllRecipesEndpointTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
