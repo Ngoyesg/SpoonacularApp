@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct DecomposedURL: Equatable {
     let host: String
     let path: String

@@ -1,5 +1,5 @@
 //
-//  FilteredRecipeEndpoint.swift
+//  FilteredRecipesEndpoint.swift
 //  SpoonacularApp
 //
 //  Created by Natalia Goyes on 23/03/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FilteredRecipeEndpoint: BaseEndpoint {
+class FilteredRecipesEndpoint: BaseEndpoint {
     
     struct Constants {
 

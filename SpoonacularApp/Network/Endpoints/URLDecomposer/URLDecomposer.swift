@@ -11,12 +11,9 @@ protocol URLDecomposerProtocol: AnyObject {
     func extract(from urlString: String) throws -> DecomposedURL
 }
 
-class URLDecomposer {
+class URLDecomposer: URLDecomposerProtocol {
     let shared = URLComponents()
-}
 
-extension URLDecomposer: URLDecomposerProtocol {
-    
     func extract(from urlString: String) throws -> DecomposedURL {
         let url = URL(string: urlString)
         let components = shared.url(relativeTo: url)

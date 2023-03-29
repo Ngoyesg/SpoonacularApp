@@ -1,5 +1,5 @@
 //
-//  FilteredRecipeEndpointTests.swift
+//  FilteredRecipesEndpointTests.swift
 //  SpoonacularAppTests
 //
 //  Created by Natalia Goyes on 25/03/23.
@@ -8,9 +8,9 @@
 import XCTest
 @testable import SpoonacularApp
 
-final class FilteredRecipeEndpointTests: XCTestCase {
+final class FilteredRecipesEndpointTests: XCTestCase {
     
-    private var sut: FilteredRecipeEndpoint!
+    private var sut: FilteredRecipesEndpoint!
     var expectation: XCTestExpectation!
     
     struct Constant {
@@ -29,15 +29,15 @@ final class FilteredRecipeEndpointTests: XCTestCase {
         super.tearDown()
     }
 
-    func testFilteredRecipeEndpoint_WhenGetURLisCalled_GivenValidSearch_ReturnShouldBeEqualToResult(){
+    func testFilteredRecipesEndpoint_WhenGetURLisCalled_GivenValidSearch_ReturnShouldBeEqualToResult(){
         //arrange
 
         //act
-        expectation = expectation(description: "FilteredRecipeEndpoint URL expectation")
+        expectation = expectation(description: "FilteredRecipesEndpoint URL expectation")
         
         //assert
         do {
-            sut = try FilteredRecipeEndpoint(search: Constant.validSearch)
+            sut = try FilteredRecipesEndpoint(search: Constant.validSearch)
             let url = try sut.getURL()
             expectation.fulfill()
             XCTAssertEqual(url, Constant.successfulURLReturned, "The returned URL should have been the same as the expected")
@@ -47,15 +47,15 @@ final class FilteredRecipeEndpointTests: XCTestCase {
         self.wait(for: [expectation], timeout: 1)
     }
     
-    func testFilteredRecipeEndpoint_WhenGetURLisCalled_GivenInvalidSearch_ShouldThrowError(){
+    func testFilteredRecipesEndpoint_WhenGetURLisCalled_GivenInvalidSearch_ShouldThrowError(){
         //arrange
 
         //act
-        expectation = expectation(description: "FilteredRecipeEndpoint URL expectation")
+        expectation = expectation(description: "FilteredRecipesEndpoint URL expectation")
         
         //assert
         do {
-            sut = try FilteredRecipeEndpoint(search: Constant.invalidSearch)
+            sut = try FilteredRecipesEndpoint(search: Constant.invalidSearch)
             let _ = try sut.getURL()
             XCTFail()
         } catch let error{
