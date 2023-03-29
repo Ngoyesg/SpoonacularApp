@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Us: Codable {
+struct MetricAPI: Codable {
 
   var amount    : Int?    = nil
   var unitShort : String? = nil

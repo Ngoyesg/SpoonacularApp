@@ -1,13 +1,13 @@
 
 import Foundation
 
-struct Ingredients: Codable {
+struct IngredientsAPI: Codable {
 
   var id        : Int?         = nil
   var name      : String?      = nil
   var amount    : Double?      = nil
   var unit      : String?      = nil
-  var nutrients : [Nutrients]? = []
+  var nutrients : [NutrientsAPI]? = []
 
   enum CodingKeys: String, CodingKey {
 
@@ -26,7 +26,7 @@ struct Ingredients: Codable {
     name      = try values.decodeIfPresent(String.self      , forKey: .name      )
     amount    = try values.decodeIfPresent(Double.self      , forKey: .amount    )
     unit      = try values.decodeIfPresent(String.self      , forKey: .unit      )
-    nutrients = try values.decodeIfPresent([Nutrients].self , forKey: .nutrients )
+    nutrients = try values.decodeIfPresent([NutrientsAPI].self , forKey: .nutrients )
  
   }
 

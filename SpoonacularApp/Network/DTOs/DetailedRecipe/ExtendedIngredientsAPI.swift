@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct ExtendedIngredients: Codable {
+struct ExtendedIngredientsAPI: Codable {
 
   var id           : Int?      = nil
   var aisle        : String?   = nil
@@ -14,7 +14,7 @@ struct ExtendedIngredients: Codable {
   var amount       : Int?      = nil
   var unit         : String?   = nil
   var meta         : [String]? = []
-  var measures     : Measures? = Measures()
+  var measures     : MeasuresAPI? = MeasuresAPI()
 
   enum CodingKeys: String, CodingKey {
 
@@ -47,7 +47,7 @@ struct ExtendedIngredients: Codable {
     amount       = try values.decodeIfPresent(Int.self      , forKey: .amount       )
     unit         = try values.decodeIfPresent(String.self   , forKey: .unit         )
     meta         = try values.decodeIfPresent([String].self , forKey: .meta         )
-    measures     = try values.decodeIfPresent(Measures.self , forKey: .measures     )
+    measures     = try values.decodeIfPresent(MeasuresAPI.self , forKey: .measures     )
  
   }
 

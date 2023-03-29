@@ -4,7 +4,7 @@ import Foundation
 struct FilteredRecipesAPI: Codable {
 
   var type             : String?     = nil
-  var products         : [Products]? = []
+  var recipes         : [RecipesAPI]? = []
   var offset           : Int?        = nil
   var number           : Int?        = nil
   var totalProducts    : Int?        = nil
@@ -14,7 +14,7 @@ struct FilteredRecipesAPI: Codable {
   enum CodingKeys: String, CodingKey {
 
     case type             = "type"
-    case products         = "products"
+    case recipes         = "products"
     case offset           = "offset"
     case number           = "number"
     case totalProducts    = "totalProducts"
@@ -23,21 +23,23 @@ struct FilteredRecipesAPI: Codable {
   
   }
 
-  init(from decoder: Decoder) throws {
-    let values = try decoder.container(keyedBy: CodingKeys.self)
+}
 
-    type             = try values.decodeIfPresent(String.self     , forKey: .type             )
-    products         = try values.decodeIfPresent([Products].self , forKey: .products         )
-    offset           = try values.decodeIfPresent(Int.self        , forKey: .offset           )
-    number           = try values.decodeIfPresent(Int.self        , forKey: .number           )
-    totalProducts    = try values.decodeIfPresent(Int.self        , forKey: .totalProducts    )
-    processingTimeMs = try values.decodeIfPresent(Int.self        , forKey: .processingTimeMs )
-    expires          = try values.decodeIfPresent(Int.self        , forKey: .expires          )
- 
-  }
-
-  init() {
-
-  }
-
+extension FilteredRecipesAPI {
+    
+    private func toDTO(_ apiData: [RecipesAPI]) -> [Recipe] {
+        apiData.map { eachRecipe in
+            eachRecipe.toObject
+        }
+    }
+    
+    var toDTO: FilteredRecipes {
+        FilteredRecipes(
+            type: self.type,
+            recipes: toDTO(self.recipes!),
+            offset: self.offset,
+            number: self.number,
+            totalProducts: self.totalProducts
+        )
+    }
 }

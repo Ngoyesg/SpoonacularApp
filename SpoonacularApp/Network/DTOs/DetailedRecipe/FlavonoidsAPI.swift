@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Properties: Codable {
+struct FlavonoidsAPI: Codable {
 
   var name   : String? = nil
   var amount : Int?    = nil

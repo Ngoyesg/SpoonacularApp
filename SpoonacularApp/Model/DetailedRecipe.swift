@@ -26,17 +26,20 @@ struct DetailedRecipe {
 
 struct Calories {
     
-    var composition : CaloricComposition? = CaloricComposition()
+    var composition : CaloricBreakdown? = CaloricBreakdown()
     
     enum CodingKeys: String, CodingKey {
         case composition = "caloricBreakdown"
     }
 }
 
-struct CaloricComposition {
+struct CaloricBreakdown {
 
   var percentProtein : Double? = nil
   var percentFat     : Double? = nil
   var percentCarbs   : Double? = nil
 
 }
+
+
+

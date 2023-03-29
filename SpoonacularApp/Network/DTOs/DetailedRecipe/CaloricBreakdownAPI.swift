@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct CaloricBreakdown: Codable {
+struct CaloricBreakdownAPI: Codable {
 
   var percentProtein : Double? = nil
   var percentFat     : Double? = nil
@@ -28,4 +28,11 @@ struct CaloricBreakdown: Codable {
 
   }
 
+}
+
+
+extension CaloricBreakdownAPI {
+    var toObject: CaloricBreakdown {
+        CaloricBreakdown(percentProtein: self.percentProtein, percentFat: self.percentFat, percentCarbs: self.percentCarbs)
+    }
 }

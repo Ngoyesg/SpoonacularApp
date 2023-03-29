@@ -11,6 +11,5 @@ struct Recipe {
   var id        : Int?    = nil
   var title     : String? = nil
   var image     : String? = nil
-  var imageType : String? = nil
 }
 

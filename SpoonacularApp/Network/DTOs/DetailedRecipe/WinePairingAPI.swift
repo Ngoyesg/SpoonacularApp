@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct WinePairing: Codable {
+struct WinePairingAPI: Codable {
 
   var pairedWines    : [String]? = []
   var pairingText    : String?   = nil

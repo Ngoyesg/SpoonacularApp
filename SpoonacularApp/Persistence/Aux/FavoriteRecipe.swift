@@ -12,7 +12,6 @@ struct FavoriteRecipe {
     var id        : Int?    = nil
     var title     : String? = nil
     var image     : String? = nil
-    var imageType : String? = nil
 }
 
 extension FavoriteRecipe: Persistable {
@@ -22,7 +21,6 @@ extension FavoriteRecipe: Persistable {
         id = managedObject.id
         title = managedObject.title
         image = managedObject.image
-        imageType = managedObject.imageType
     }
     
     public func managedObject() -> FavoriteRecipeObject {
@@ -30,7 +28,6 @@ extension FavoriteRecipe: Persistable {
         favoriteRecipeObject.id = id
         favoriteRecipeObject.title = title
         favoriteRecipeObject.image = image
-        favoriteRecipeObject.imageType = imageType
         return favoriteRecipeObject
     }
 }

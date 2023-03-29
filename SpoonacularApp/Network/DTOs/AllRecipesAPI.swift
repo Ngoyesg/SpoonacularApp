@@ -9,7 +9,7 @@ import Foundation
 
 struct AllRecipesAPI: Codable {
 
-  var results      : [RecipiesResults]? = []
+  var results      : [RecipesAPI]? = []
   var offset       : Int?       = nil
   var number       : Int?       = nil
   var totalResults : Int?       = nil
@@ -21,20 +21,6 @@ struct AllRecipesAPI: Codable {
     case number       = "number"
     case totalResults = "totalResults"
   
-  }
-
-  init(from decoder: Decoder) throws {
-    let values = try decoder.container(keyedBy: CodingKeys.self)
-
-    results      = try values.decodeIfPresent([RecipiesResults].self , forKey: .results      )
-    offset       = try values.decodeIfPresent(Int.self       , forKey: .offset       )
-    number       = try values.decodeIfPresent(Int.self       , forKey: .number       )
-    totalResults = try values.decodeIfPresent(Int.self       , forKey: .totalResults )
- 
-  }
-
-  init() {
-
   }
 
 }

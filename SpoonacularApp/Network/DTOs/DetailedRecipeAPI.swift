@@ -28,7 +28,7 @@ struct DetailedRecipeAPI: Codable {
     var license                  : String?                = nil
     var sourceName               : String?                = nil
     var pricePerServing          : Double?                = nil
-    var extendedIngredients      : [ExtendedIngredients]? = []
+    var extendedIngredients      : [ExtendedIngredientsAPI]? = []
     var id                       : Int?                   = nil
     var title                    : String?                = nil
     var readyInMinutes           : Int?                   = nil
@@ -36,13 +36,13 @@ struct DetailedRecipeAPI: Codable {
     var sourceUrl                : String?                = nil
     var image                    : String?                = nil
     var imageType                : String?                = nil
-    var nutrition                : Nutrition?             = Nutrition()
+    var nutrition                : NutritionAPI?             = NutritionAPI()
     var summary                  : String?                = nil
     var cuisines                 : [String]?              = []
     var dishTypes                : [String]?              = []
     var diets                    : [String]?              = []
     var occasions                : [String]?              = []
-    var winePairing              : WinePairing?           = WinePairing()
+    var winePairing              : WinePairingAPI?           = WinePairingAPI()
     var instructions             : String?                = nil
     var analyzedInstructions     : [String]?              = []
     var originalId               : String?                = nil
@@ -92,52 +92,17 @@ struct DetailedRecipeAPI: Codable {
     }
     
     
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        
-        vegetarian               = try values.decodeIfPresent(Bool.self                  , forKey: .vegetarian               )
-        vegan                    = try values.decodeIfPresent(Bool.self                  , forKey: .vegan                    )
-        glutenFree               = try values.decodeIfPresent(Bool.self                  , forKey: .glutenFree               )
-        dairyFree                = try values.decodeIfPresent(Bool.self                  , forKey: .dairyFree                )
-        veryHealthy              = try values.decodeIfPresent(Bool.self                  , forKey: .veryHealthy              )
-        cheap                    = try values.decodeIfPresent(Bool.self                  , forKey: .cheap                    )
-        veryPopular              = try values.decodeIfPresent(Bool.self                  , forKey: .veryPopular              )
-        sustainable              = try values.decodeIfPresent(Bool.self                  , forKey: .sustainable              )
-        lowFodmap                = try values.decodeIfPresent(Bool.self                  , forKey: .lowFodmap                )
-        weightWatcherSmartPoints = try values.decodeIfPresent(Int.self                   , forKey: .weightWatcherSmartPoints )
-        gaps                     = try values.decodeIfPresent(String.self                , forKey: .gaps                     )
-        preparationMinutes       = try values.decodeIfPresent(Int.self                   , forKey: .preparationMinutes       )
-        cookingMinutes           = try values.decodeIfPresent(Int.self                   , forKey: .cookingMinutes           )
-        aggregateLikes           = try values.decodeIfPresent(Int.self                   , forKey: .aggregateLikes           )
-        healthScore              = try values.decodeIfPresent(Int.self                   , forKey: .healthScore              )
-        creditsText              = try values.decodeIfPresent(String.self                , forKey: .creditsText              )
-        license                  = try values.decodeIfPresent(String.self                , forKey: .license                  )
-        sourceName               = try values.decodeIfPresent(String.self                , forKey: .sourceName               )
-        pricePerServing          = try values.decodeIfPresent(Double.self                , forKey: .pricePerServing          )
-        extendedIngredients      = try values.decodeIfPresent([ExtendedIngredients].self , forKey: .extendedIngredients      )
-        id                       = try values.decodeIfPresent(Int.self                   , forKey: .id                       )
-        title                    = try values.decodeIfPresent(String.self                , forKey: .title                    )
-        readyInMinutes           = try values.decodeIfPresent(Int.self                   , forKey: .readyInMinutes           )
-        servings                 = try values.decodeIfPresent(Int.self                   , forKey: .servings                 )
-        sourceUrl                = try values.decodeIfPresent(String.self                , forKey: .sourceUrl                )
-        image                    = try values.decodeIfPresent(String.self                , forKey: .image                    )
-        imageType                = try values.decodeIfPresent(String.self                , forKey: .imageType                )
-        nutrition                = try values.decodeIfPresent(Nutrition.self             , forKey: .nutrition                )
-        summary                  = try values.decodeIfPresent(String.self                , forKey: .summary                  )
-        cuisines                 = try values.decodeIfPresent([String].self              , forKey: .cuisines                 )
-        dishTypes                = try values.decodeIfPresent([String].self              , forKey: .dishTypes                )
-        diets                    = try values.decodeIfPresent([String].self              , forKey: .diets                    )
-        occasions                = try values.decodeIfPresent([String].self              , forKey: .occasions                )
-        winePairing              = try values.decodeIfPresent(WinePairing.self           , forKey: .winePairing              )
-        instructions             = try values.decodeIfPresent(String.self                , forKey: .instructions             )
-        analyzedInstructions     = try values.decodeIfPresent([String].self              , forKey: .analyzedInstructions     )
-        originalId               = try values.decodeIfPresent(String.self                , forKey: .originalId               )
-        spoonacularSourceUrl     = try values.decodeIfPresent(String.self                , forKey: .spoonacularSourceUrl     )
-        
+}
+
+extension DetailedRecipeAPI {
+    
+    private func toDTO(_ apiData: [RecipesAPI]) -> [Recipe] {
+        apiData.map { eachRecipe in
+            eachRecipe.toObject
+        }
     }
     
-    init() {
-        
+    var toDTO: DetailedRecipe {
+        DetailedRecipe(vegetarian: self.vegetarian, vegan: self.vegan, glutenFree: self.glutenFree, dairyFree: self.vegetarian, preparationMinutes: self.preparationMinutes, cookingMinutes: self.cookingMinutes, id: self.id, title: self.title, readyInMinutes: self.readyInMinutes, servings: self.servings, sourceUrl: self.sourceUrl, image: self.image, nutrition: self.nutrition?.toObject, instructions: self.instructions)
     }
-    
 }

@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct WeightPerServing: Codable {
+struct WeightPerServingAPI: Codable {
 
   var amount : Int?    = nil
   var unit   : String? = nil

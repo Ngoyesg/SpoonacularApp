@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Nutrients: Codable {
+struct NutrientsAPI: Codable {
 
   var name                : String? = nil
   var amount              : Int?    = nil
