@@ -24,6 +24,7 @@ extension FavoriteRecipe: Persistable {
         image = managedObject.image
         imageType = managedObject.imageType
     }
+    
     public func managedObject() -> FavoriteRecipeObject {
         let favoriteRecipeObject = FavoriteRecipeObject()
         favoriteRecipeObject.id = id

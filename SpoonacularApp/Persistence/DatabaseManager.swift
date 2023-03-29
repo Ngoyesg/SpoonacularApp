@@ -16,6 +16,7 @@ protocol DBManagerProtocol: AnyObject {
     func getAll() throws -> [FavoriteRecipe]
     func add<T: Persistable>(object: T) throws
     func delete<T: Persistable>(object: T) throws
+    func deleteAll() throws
 }
 
 class DBManager: DBManagerProtocol {
@@ -28,10 +29,12 @@ class DBManager: DBManagerProtocol {
       }
     
     
-    func getAll() -> [FavoriteRecipe] {
-        let results = realm.objects(FavoriteRecipeObject.self)
-        //Need to map the results here
-        return [FavoriteRecipe(id: 0, title: "", image: "", imageType: "")]
+    func getAll() throws -> [FavoriteRecipe] {
+        let results = realm.objects(FavoriteRecipeObject.self).toArray(ofType: FavoriteRecipe.self)
+        if results.count == 0 {
+            throw DBManagerError.unableToRetriveData
+        }
+        return results
     }
     
     
