@@ -7,71 +7,31 @@
 
 import Foundation
 
-class DetailedRecipeModel {
+
+struct DetailedRecipeModel {
     
-    let webResponse: DetailedRecipeAPI
+    var nutrition: Nutrition?
     
-    init(webResponse: DetailedRecipeAPI) {
-        self.webResponse = webResponse
-    }
+    var vegetarian: Bool?
     
-    var nutrition: Nutrition? {
-        webResponse.nutrition?.nutritionToObject
-    }
+    var vegan: Bool?
     
-    var vegetarian: Bool? {
-        webResponse.vegetarian
-    }
+    var glutenFree: Bool?
     
-    var vegan: Bool? {
-        webResponse.vegan
-    }
+    var dairyFree: Bool?
     
-    var glutenFree: Bool? {
-        webResponse.glutenFree
-    }
+    var preparationMinutes: Int?
     
-    var dairyFree: Bool? {
-        webResponse.dairyFree
-    }
+    var cookingMinutes: Int?
     
-    var preparationMinutes: Int? {
-        webResponse.preparationMinutes
-    }
+    var id: Int?
+        
+    var title: String?
     
-    var cookingMinutes: Int? {
-        webResponse.cookingMinutes
-    }
+    var sourceUrl: String?
     
-    var id: Int? {
-        webResponse.id
-    }
+    var image: String?
     
-    var title: String? {
-        webResponse.title
-    }
-    
-    var readyInMinutes: Int? {
-        webResponse.readyInMinutes
-    }
-    
-    var servings: Int? {
-        webResponse.servings
-    }
-    
-    var sourceUrl: String? {
-        webResponse.sourceUrl
-    }
-    
-    var image: String? {
-        webResponse.image
-    }
-    
-    var instructions: String? {
-        webResponse.instructions
-    }
-    
+    var instructions: String?
     
 }
-
-

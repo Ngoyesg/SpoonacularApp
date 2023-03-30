@@ -7,34 +7,37 @@
 
 import Foundation
 
-class FilteredRecipesWebService {
+class FilteredRecipesWebService: WebService<FilteredRecipesAPI, FilteredRecipesEndpoint> {
     
-    let webService: WebService
-    let endpointBuilder: FilteredRecipesEndpoint
+    let converter: FilteredRecipesAPIToModelMapProtocol
     
-    init(webService: WebService, endpointBuilder: FilteredRecipesEndpoint) {
-        self.webService = webService
-        self.endpointBuilder = endpointBuilder
+    init(converter: FilteredRecipesAPIToModelMapProtocol) {
+        self.converter = converter
     }
     
-    func getAllRecipes(completionHandler: @escaping (FilteredRecipesModel?, WebServiceError?)-> Void) {
+    func getFilteredRecipes(for keyword: String, completion: @escaping (FilteredRecipesModel?, WebServiceError?)-> Void) {
         
-        guard let url = try? endpointBuilder.getURL() else {
-            completionHandler(nil, WebServiceError.buildingEndpointFailed)
-            return
-        }
-    
-        let filteredRecipesResource = Resource<FilteredRecipesAPI>(url: url, httpMethod: .get, httpHeaders: ContentTypeHeaders.json) { data in
-            let filteredRecipesResource = try? JSONDecoder().decode(FilteredRecipesAPI.self, from: data)
-            return filteredRecipesResource
+        guard let endpoint = try? FilteredRecipesEndpoint(search: keyword) else {
+            fatalError()
         }
         
-        webService.load(resource: filteredRecipesResource) { result in
-            if let result = result {
-                let viewModel = FilteredRecipesModel(webResponse: result)
-                completionHandler(viewModel, nil)
+        makeRequest(endpoint: endpoint) { [weak self] results, error in
+            
+            guard let self = self else {
+                completion(nil, .unexpectedError)
+                return
+            }
+            
+            if let results = results {
+                let transformedData = self.converter.convert(results)
+                completion(transformedData, nil)
+                return
+            }
+            
+            if error != nil {
+                completion(nil, .unexpectedError)
+                return
             }
         }
-        
     }
 }

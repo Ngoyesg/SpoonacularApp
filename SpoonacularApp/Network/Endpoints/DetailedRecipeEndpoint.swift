@@ -25,7 +25,7 @@ class DetailedRecipeEndpoint: BaseEndpoint {
         
         let path = "/recipes/\(recipeID)/information"
         let queryItem = URLQueryItem(name: Constants.Keys.includeNutrition, value: String(includeNutrition))
-        super.init(path: path, queryItems: [queryItem], httpMethod: .get)
+        super.init(path: path, contentType: .json, queryItems: [queryItem], httpMethod: .get)
     }
     
 }

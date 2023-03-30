@@ -7,33 +7,32 @@
 
 import Foundation
 
-class ImageWebService {
+class ImageWebService: WebService<Data, ImageRecipeEndpoint> {
     
-    let webService: WebService
-    let endpointBuilder: ImageRecipeEndpoint
     
-    init(webService: WebService, endpointBuilder: ImageRecipeEndpoint) {
-        self.webService = webService
-        self.endpointBuilder = endpointBuilder
-    }
     
-    func getAllRecipes(completionHandler: @escaping (Data?, WebServiceError?)-> Void) {
+    func getImage(for imageURL: String, completion: @escaping (Data?, WebServiceError?)-> Void) {
         
-        guard let url = try? endpointBuilder.getURL() else {
-            completionHandler(nil, WebServiceError.buildingEndpointFailed)
-            return
-        }
-    
-        let imageResource = Resource<Data>(url: url, httpMethod: .get, httpHeaders: ContentTypeHeaders.json) { data in
-            let imageResource = try? JSONDecoder().decode(Data.self, from: data)
-            return imageResource
+        guard let endpoint = try? ImageRecipeEndpoint(imagePath: imageURL) else {
+            fatalError()
         }
         
-        webService.load(resource: imageResource) { result in
-            if let result = result {
-                completionHandler(result, nil)
+        makeRequest(endpoint: endpoint) { [weak self] results, error in
+            
+            guard let self = self else {
+                completion(nil, .unexpectedError)
+                return
+            }
+            
+            if let results = results {
+                completion(results, nil)
+                return
+            }
+            
+            if error != nil {
+                completion(nil, .unexpectedError)
+                return
             }
         }
-        
     }
 }

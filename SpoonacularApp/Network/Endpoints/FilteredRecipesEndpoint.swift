@@ -23,7 +23,7 @@ class FilteredRecipesEndpoint: BaseEndpoint {
             throw EndpointError.emptySearch
         }
         let queryItem =  URLQueryItem(name: Constants.Keys.queryKey, value: String(describing: keywords))
-        super.init(path: Constants.Keys.path, queryItems: [queryItem], httpMethod: .get)
+        super.init(path: Constants.Keys.path, contentType: .json, queryItems: [queryItem], httpMethod: .get)
     }
     
 }

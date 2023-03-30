@@ -8,6 +8,10 @@
 import Foundation
 import Alamofire
 
+enum ContentType {
+    case json, image
+}
+
 class BaseEndpoint {
     
     private var scheme: String = "https"
@@ -16,13 +20,15 @@ class BaseEndpoint {
     private var queryItems: [URLQueryItem]
     private var httpMethod: HTTPMethod
     private let authKey = URLQueryItem(name: "apiKey", value: Constants.apiKey)
+    private let contentType: ContentType
     
-    init(host: String = "api.spoonacular.com", path: String, queryItems: [URLQueryItem] = [], httpMethod: HTTPMethod = .get) {
+    init(path: String, contentType: ContentType, host: String = "api.spoonacular.com", queryItems: [URLQueryItem] = [], httpMethod: HTTPMethod = .get) {
         self.host = host
         self.path = path
         self.queryItems = [authKey]
         self.queryItems += queryItems
         self.httpMethod = httpMethod
+        self.contentType = contentType
     }
     
     func getURL() throws -> URL {
@@ -36,5 +42,18 @@ class BaseEndpoint {
             throw EndpointError.invalidURL
         }
         return url
+    }
+    
+    func getHTTPMethod() -> HTTPMethod {
+        httpMethod
+    }
+    
+    func getHeaders() -> HTTPHeaders {
+        switch contentType {
+        case .image:
+            return ContentTypeHeaders.image
+        case .json:
+            return ContentTypeHeaders.json
+        }
     }
 }

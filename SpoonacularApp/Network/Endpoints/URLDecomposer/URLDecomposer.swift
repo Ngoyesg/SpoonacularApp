@@ -8,13 +8,13 @@
 import Foundation
 
 protocol URLDecomposerProtocol: AnyObject {
-    func extract(from urlString: String) throws -> DecomposedURL
+    static func extract(from urlString: String) throws -> DecomposedURL
 }
 
 class URLDecomposer: URLDecomposerProtocol {
-    let shared = URLComponents()
-
-    func extract(from urlString: String) throws -> DecomposedURL {
+   
+    static func extract(from urlString: String) throws -> DecomposedURL {
+        let shared = URLComponents()
         let url = URL(string: urlString)
         let components = shared.url(relativeTo: url)
         let host = components?.host

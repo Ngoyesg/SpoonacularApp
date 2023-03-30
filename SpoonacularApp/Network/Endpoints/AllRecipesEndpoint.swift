@@ -27,7 +27,7 @@ class AllRecipesEndpoint: BaseEndpoint {
         let offset = URLQueryItem(name: Constants.Keys.offsetKey, value: String(offset))
         let maxNumber = URLQueryItem(name: Constants.Keys.maximumNumberKey, value: String(number))
         let queryItems = [offset, maxNumber]
-        super.init(path: Constants.allRecipesPath, queryItems: queryItems )
+        super.init(path: Constants.allRecipesPath, contentType: .json, queryItems: queryItems)
     }
     
 }

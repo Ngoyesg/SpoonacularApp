@@ -7,34 +7,17 @@
 
 import Foundation
 
-class FilteredRecipesModel {
+struct FilteredRecipesModel {
     
-    let webResponse: FilteredRecipesAPI
+    var type: String?
     
-    init(webResponse: FilteredRecipesAPI) {
-        self.webResponse = webResponse
-    }
+    var recipes: [Recipe]?
     
-    var type: String? {
-        webResponse.type
-    }
+    var offset: Int?
     
-    var recipes: [Recipe]? {
-        webResponse.resultstoObject
-    }
+    var number: Int?
     
-    var offset: Int? {
-        webResponse.offset
-    }
-    
-    var number: Int? {
-        webResponse.number
-    }
-    
-    var totalProducts: Int? {
-        webResponse.totalProducts
-    }
+    var totalProducts: Int?
     
 }
-
 

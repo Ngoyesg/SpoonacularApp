@@ -8,46 +8,49 @@
 import Alamofire
 import Foundation
 
-struct Resource<T> {
-    let url: URL
-    var httpMethod: HTTPMethod
-    var httpHeaders: HTTPHeaders
-    let parse: (Data) -> T?
-}
-
-
 struct ContentTypeHeaders {
     static let json: HTTPHeaders = HTTPHeaders(arrayLiteral: HTTPHeader(name: "content-type", value: "application/json"))
     static let image: HTTPHeaders = HTTPHeaders(arrayLiteral: HTTPHeader(name: "content-type", value: "image/jpeg"))
 }
 
 enum WebServiceError: Error {
-    case unableToFetchData, buildingEndpointFailed
+    case unableToFetchData, buildingEndpointFailed, unexpectedResponseFormat, emptyResponse, unexpectedError
 }
 
-
-final class WebService {
-    
+class WebService<ReturnType: Decodable, Endpoint: BaseEndpoint> {
     private let manager: Session
     
     init(manager: Session = Session.default) {
         self.manager = manager
     }
     
-    
-    func load<T>(resource: Resource<T>, completion: @escaping (T?)-> ()) {
+    func makeRequest(endpoint: Endpoint, completion: @escaping (ReturnType?, WebServiceError?)-> Void) {
+        guard let url = try? endpoint.getURL() else {
+            completion(nil, .buildingEndpointFailed)
+            return
+        }
         
-        manager.request(resource.url, method: resource.httpMethod, parameters: nil, encoding: URLEncoding.default, headers: resource.httpHeaders, interceptor: nil).response {
+        manager.request(url, method: endpoint.getHTTPMethod(), parameters: nil, encoding: URLEncoding.default, headers: endpoint.getHeaders(), interceptor: nil).response {
             
             response in
             
             switch response.result {
             case .success(let data):
+                guard let data = data else {
+                    completion(nil, .emptyResponse)
+                    return
+                }
+                
+                guard let result = try? JSONDecoder().decode(ReturnType.self, from: data) else {
+                    completion(nil, .unexpectedResponseFormat)
+                    return
+                }
+                
                 DispatchQueue.main.async {
-                    completion(resource.parse(data!))
+                    completion(result, nil)
                 }
             case .failure(_):
-                completion(nil)
+                completion(nil, .unexpectedError)
             }
             
         }

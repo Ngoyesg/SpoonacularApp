@@ -8,15 +8,16 @@
 import Foundation
 
 protocol DBAddManagerProtocol: AnyObject {
-    func add<T: Persistable>(object: T) throws
+    func add(object: FavoriteRecipe) throws
 }
 
 class DBAddManager: DBManager, DBAddManagerProtocol{
     
-    func add<T: Persistable>(object: T) throws {
+    func add(object: FavoriteRecipe) throws{
         do {
             try realm.write{
-                realm.add(object.managedObject())
+//                
+//                realm.add(object.managedObject())
             }
         } catch {
             throw DBManagerError.unableToAddObject

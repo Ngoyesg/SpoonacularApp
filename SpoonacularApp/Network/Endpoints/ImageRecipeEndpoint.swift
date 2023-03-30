@@ -8,15 +8,10 @@
 import Foundation
 
 class ImageRecipeEndpoint: BaseEndpoint {
-
-    let decomposer: URLDecomposerProtocol?
-    
-    init(imagePath: String, decomposer: URLDecomposerProtocol) throws {
-        
-        self.decomposer = decomposer
-        
-        if let urlDecomposed = try? decomposer.extract(from: imagePath) {
-            super.init(host: urlDecomposed.host, path: urlDecomposed.path)
+   
+    init(imagePath: String) throws {
+        if let urlDecomposed = try? URLDecomposer.extract(from: imagePath) {
+            super.init(path: urlDecomposed.path, contentType: .image ,host: urlDecomposed.host)
         } else {
             throw EndpointError.invalidURL
         }

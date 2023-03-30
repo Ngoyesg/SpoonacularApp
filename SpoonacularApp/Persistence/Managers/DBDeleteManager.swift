@@ -6,31 +6,31 @@
 //
 
 import Foundation
-
-protocol DBDeleteManagerProtocol: AnyObject {
-    func delete<T: Persistable>(object: T) throws
-    func deleteAll() throws
-}
-
-class DBDeleteManager: DBManager {
-    
-    func delete<T: Persistable>(object: T) throws {
-        do {
-            try realm.write{
-                realm.delete(object.managedObject())
-            }
-        } catch {
-            throw DBManagerError.unableToDeleteObject
-        }
-    }
-    
-    func deleteAll() throws {
-        do {
-            try realm.write{
-                realm.deleteAll()
-            }
-        } catch {
-            throw DBManagerError.unableToDeleteData
-        }
-    }
-}
+//
+//protocol DBDeleteManagerProtocol: AnyObject {
+//    func delete<T: Persistable>(object: T) throws
+//    func deleteAll() throws
+//}
+//
+//class DBDeleteManager: DBManager {
+//    
+//    func delete<T: Persistable>(object: T) throws {
+//        do {
+//            try realm.write{
+//                realm.delete(object.managedObject())
+//            }
+//        } catch {
+//            throw DBManagerError.unableToDeleteObject
+//        }
+//    }
+//    
+//    func deleteAll() throws {
+//        do {
+//            try realm.write{
+//                realm.deleteAll()
+//            }
+//        } catch {
+//            throw DBManagerError.unableToDeleteData
+//        }
+//    }
+//}
