@@ -15,6 +15,17 @@ struct Resource<T> {
     let parse: (Data) -> T?
 }
 
+
+struct ContentTypeHeaders {
+    static let json: HTTPHeaders = HTTPHeaders(arrayLiteral: HTTPHeader(name: "content-type", value: "application/json"))
+    static let image: HTTPHeaders = HTTPHeaders(arrayLiteral: HTTPHeader(name: "content-type", value: "image/jpeg"))
+}
+
+enum WebServiceError: Error {
+    case unableToFetchData, buildingEndpointFailed
+}
+
+
 final class WebService {
     
     private let manager: Session
@@ -22,6 +33,7 @@ final class WebService {
     init(manager: Session = Session.default) {
         self.manager = manager
     }
+    
     
     func load<T>(resource: Resource<T>, completion: @escaping (T?)-> ()) {
         

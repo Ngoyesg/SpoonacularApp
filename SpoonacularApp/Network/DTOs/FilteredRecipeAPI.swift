@@ -26,20 +26,9 @@ struct FilteredRecipesAPI: Codable {
 }
 
 extension FilteredRecipesAPI {
-    
-    private func toDTO(_ apiData: [RecipesAPI]) -> [Recipe] {
-        apiData.map { eachRecipe in
+    var resultstoObject: [Recipe]? {
+        recipes?.map({ eachRecipe in
             eachRecipe.toObject
-        }
-    }
-    
-    var toDTO: FilteredRecipes {
-        FilteredRecipes(
-            type: self.type,
-            recipes: toDTO(self.recipes!),
-            offset: self.offset,
-            number: self.number,
-            totalProducts: self.totalProducts
-        )
+        })
     }
 }

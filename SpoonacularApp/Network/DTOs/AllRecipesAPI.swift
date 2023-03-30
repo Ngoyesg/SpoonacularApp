@@ -24,3 +24,11 @@ struct AllRecipesAPI: Codable {
   }
 
 }
+
+extension AllRecipesAPI {
+    var resultstoObject: [Recipe]? {
+        results?.map({ eachRecipe in
+            eachRecipe.toObject
+        })
+    }
+}

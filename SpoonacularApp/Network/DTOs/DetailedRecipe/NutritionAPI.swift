@@ -40,7 +40,7 @@ struct NutritionAPI: Codable {
 }
 
 extension NutritionAPI {
-    var toObject: Calories {
-        Calories(composition: self.caloricBreakdown?.toObject)
+    var nutritionToObject: Nutrition {
+        Nutrition(composition: self.caloricBreakdown?.caloriesToObject)
     }
 }

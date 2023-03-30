@@ -2,7 +2,7 @@
 //  DetailedRecipe.swift
 //  SpoonacularApp
 //
-//  Created by Natalia Goyes on 28/03/23.
+//  Created by Natalia Goyes on 29/03/23.
 //
 
 import Foundation
@@ -20,26 +20,6 @@ struct DetailedRecipe {
     var servings                 : Int?                   = nil
     var sourceUrl                : String?                = nil
     var image                    : String?                = nil
-    var nutrition                : Calories?             = Calories()
+    var nutrition                : Nutrition?             = Nutrition()
     var instructions             : String?                = nil
 }
-
-struct Calories {
-    
-    var composition : CaloricBreakdown? = CaloricBreakdown()
-    
-    enum CodingKeys: String, CodingKey {
-        case composition = "caloricBreakdown"
-    }
-}
-
-struct CaloricBreakdown {
-
-  var percentProtein : Double? = nil
-  var percentFat     : Double? = nil
-  var percentCarbs   : Double? = nil
-
-}
-
-
-

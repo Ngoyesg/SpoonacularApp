@@ -103,6 +103,6 @@ extension DetailedRecipeAPI {
     }
     
     var toDTO: DetailedRecipe {
-        DetailedRecipe(vegetarian: self.vegetarian, vegan: self.vegan, glutenFree: self.glutenFree, dairyFree: self.vegetarian, preparationMinutes: self.preparationMinutes, cookingMinutes: self.cookingMinutes, id: self.id, title: self.title, readyInMinutes: self.readyInMinutes, servings: self.servings, sourceUrl: self.sourceUrl, image: self.image, nutrition: self.nutrition?.toObject, instructions: self.instructions)
+        DetailedRecipe(vegetarian: self.vegetarian, vegan: self.vegan, glutenFree: self.glutenFree, dairyFree: self.vegetarian, preparationMinutes: self.preparationMinutes, cookingMinutes: self.cookingMinutes, id: self.id, title: self.title, readyInMinutes: self.readyInMinutes, servings: self.servings, sourceUrl: self.sourceUrl, image: self.image, nutrition: self.nutrition?.nutritionToObject, instructions: self.instructions)
     }
 }

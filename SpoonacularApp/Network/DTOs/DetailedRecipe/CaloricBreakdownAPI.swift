@@ -32,7 +32,7 @@ struct CaloricBreakdownAPI: Codable {
 
 
 extension CaloricBreakdownAPI {
-    var toObject: CaloricBreakdown {
+    var caloriesToObject: CaloricBreakdown {
         CaloricBreakdown(percentProtein: self.percentProtein, percentFat: self.percentFat, percentCarbs: self.percentCarbs)
     }
 }
