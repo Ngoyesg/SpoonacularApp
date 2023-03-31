@@ -1,5 +1,5 @@
 //
-//  RecipesViewController.swift
+//  DetailedRecipeViewController.swift
 //  SpoonacularApp
 //
 //  Created by Natalia Goyes on 30/03/23.
@@ -7,15 +7,19 @@
 
 import UIKit
 
-protocol RecipesViewControllerProtocol: AnyObject {
+protocol DetailsViewControllerProtocol: AnyObject {
     
 }
 
-class RecipesViewController: UIViewController {
+class DetailsViewController: UIViewController {
     
+    @IBOutlet weak var recipeTitleLabel: UILabel!
+    @IBOutlet weak var recipeImageView: UIImageView!
+    @IBOutlet weak var vegetarianImageView: UIImageView!
+    @IBOutlet weak var veganImageView: UIImageView!
+    @IBOutlet weak var glutenFreeImageView: UIImageView!
+    @IBOutlet weak var dairyFreeImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var filterRecipeTextField: UITextField!
-    @IBOutlet weak var searchRecipeButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +27,9 @@ class RecipesViewController: UIViewController {
         tableView.dataSource = self
     }
     
-    
-    @IBAction func onSearchRecipeButtonTapped(){
-        
-    }
-    
 }
 
-extension RecipesViewController: UITableViewDelegate, UITableViewDataSource {
+extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
@@ -44,5 +43,6 @@ extension RecipesViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.reloadData()
     }
     
+
     
 }

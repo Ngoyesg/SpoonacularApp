@@ -11,7 +11,7 @@ import RealmSwift
 class FavoriteRecipeObject: Object {
     dynamic var id: Int?
     dynamic var title: String?
-    dynamic var image: String?
+    dynamic var image: Data?
     
     override static func primaryKey() -> String? {
         return "id"

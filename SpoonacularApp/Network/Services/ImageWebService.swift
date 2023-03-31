@@ -7,14 +7,17 @@
 
 import Foundation
 
-class ImageWebService: WebService<Data, ImageRecipeEndpoint> {
-    
-    
+protocol ImageWebServiceProtocol {
+    func getImage(for imageURL: String, completion: @escaping (Data?, WebServiceError?)-> Void)
+}
+
+class ImageWebService: WebService<Data, ImageRecipeEndpoint>, ImageWebServiceProtocol {
     
     func getImage(for imageURL: String, completion: @escaping (Data?, WebServiceError?)-> Void) {
         
         guard let endpoint = try? ImageRecipeEndpoint(imagePath: imageURL) else {
-            fatalError()
+            completion(nil, .buildingEndpointFailed)
+            return
         }
         
         makeRequest(endpoint: endpoint) { [weak self] results, error in
@@ -24,13 +27,13 @@ class ImageWebService: WebService<Data, ImageRecipeEndpoint> {
                 return
             }
             
-            if let results = results {
-                completion(results, nil)
+            if error != nil {
+                completion(nil, .unexpectedError)
                 return
             }
             
-            if error != nil {
-                completion(nil, .unexpectedError)
+            if let results = results {
+                completion(results, nil)
                 return
             }
         }

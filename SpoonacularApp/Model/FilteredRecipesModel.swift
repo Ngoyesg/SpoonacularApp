@@ -10,13 +10,9 @@ import Foundation
 struct FilteredRecipesModel {
     
     var type: String?
-    
     var recipes: [Recipe]?
-    
     var offset: Int?
-    
     var number: Int?
-    
     var totalProducts: Int?
     
 }

@@ -7,7 +7,11 @@
 
 import Foundation
 
-class FilteredRecipesWebService: WebService<FilteredRecipesAPI, FilteredRecipesEndpoint> {
+protocol FilteredRecipesWebServiceProtocol {
+    func getFilteredRecipes(for keyword: String, completion: @escaping (AllRecipesModel?, WebServiceError?)-> Void)
+}
+
+class FilteredRecipesWebService: WebService<FilteredRecipesAPI, FilteredRecipesEndpoint>, FilteredRecipesWebServiceProtocol {
     
     let converter: FilteredRecipesAPIToModelMapProtocol
     
@@ -15,10 +19,11 @@ class FilteredRecipesWebService: WebService<FilteredRecipesAPI, FilteredRecipesE
         self.converter = converter
     }
     
-    func getFilteredRecipes(for keyword: String, completion: @escaping (FilteredRecipesModel?, WebServiceError?)-> Void) {
+    func getFilteredRecipes(for keyword: String, completion: @escaping (AllRecipesModel?, WebServiceError?)-> Void) {
         
         guard let endpoint = try? FilteredRecipesEndpoint(search: keyword) else {
-            fatalError()
+            completion(nil, .buildingEndpointFailed)
+            return
         }
         
         makeRequest(endpoint: endpoint) { [weak self] results, error in
@@ -28,14 +33,14 @@ class FilteredRecipesWebService: WebService<FilteredRecipesAPI, FilteredRecipesE
                 return
             }
             
-            if let results = results {
-                let transformedData = self.converter.convert(results)
-                completion(transformedData, nil)
+            if error != nil {
+                completion(nil, .unexpectedError)
                 return
             }
             
-            if error != nil {
-                completion(nil, .unexpectedError)
+            if let results = results {
+                let transformedData = self.converter.convert(results)
+                completion(transformedData, nil)
                 return
             }
         }

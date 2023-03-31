@@ -7,7 +7,11 @@
 
 import Foundation
 
-class DetailedRecipeWebService: WebService<DetailedRecipeAPI, DetailedRecipeEndpoint> {
+protocol DetailedRecipeWebServiceProtocol {
+    func getDetails(for id: Int, with nutrition: Bool, completion: @escaping (DetailedRecipeModel?, WebServiceError?)-> Void)
+}
+
+class DetailedRecipeWebService: WebService<DetailedRecipeAPI, DetailedRecipeEndpoint>, DetailedRecipeWebServiceProtocol {
     
     let converter: DetailedRecipeAPIToModelMapProtocol
     
@@ -18,12 +22,18 @@ class DetailedRecipeWebService: WebService<DetailedRecipeAPI, DetailedRecipeEndp
     func getDetails(for id: Int, with nutrition: Bool, completion: @escaping (DetailedRecipeModel?, WebServiceError?)-> Void) {
         
         guard let endpoint = try? DetailedRecipeEndpoint(recipeID: id, includeNutrition: nutrition) else {
-            fatalError()
+            completion(nil, .buildingEndpointFailed)
+            return
         }
         
         makeRequest(endpoint: endpoint) { [weak self] results, error in
             
             guard let self = self else {
+                completion(nil, .unexpectedError)
+                return
+            }
+            
+            if error != nil {
                 completion(nil, .unexpectedError)
                 return
             }
@@ -34,10 +44,6 @@ class DetailedRecipeWebService: WebService<DetailedRecipeAPI, DetailedRecipeEndp
                 return
             }
             
-            if error != nil {
-                completion(nil, .unexpectedError)
-                return
-            }
         }
     }
 }

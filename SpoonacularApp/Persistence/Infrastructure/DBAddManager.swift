@@ -8,16 +8,22 @@
 import Foundation
 
 protocol DBAddManagerProtocol: AnyObject {
-    func add(object: FavoriteRecipe) throws
+    func add(recipe: FavoriteRecipe) throws
 }
 
 class DBAddManager: DBManager, DBAddManagerProtocol{
     
-    func add(object: FavoriteRecipe) throws{
+    let converter: FavoriteRecipeToObjectProtocol
+    
+    init(converter: FavoriteRecipeToObjectProtocol) {
+        self.converter = converter
+    }
+    
+    func add(recipe: FavoriteRecipe) throws{
         do {
             try realm.write{
-//                
-//                realm.add(object.managedObject())
+                let object = converter.convert(recipe)
+                realm.add(object)
             }
         } catch {
             throw DBManagerError.unableToAddObject

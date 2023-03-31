@@ -8,12 +8,12 @@
 import Foundation
 
 protocol FilteredRecipesAPIToModelMapProtocol: AnyObject {
-    func convert(_ input: FilteredRecipesAPI) -> FilteredRecipesModel
+    func convert(_ input: FilteredRecipesAPI) -> AllRecipesModel
 }
 
 class FilteredRecipesAPIToModelMap {
-    func convert(_ input: FilteredRecipesAPI) -> FilteredRecipesModel {
-        FilteredRecipesModel(type: input.type, recipes: input.resultstoObject, offset: input.offset, number: input.number, totalProducts: input.totalProducts)
+    func convert(_ input: FilteredRecipesAPI) -> AllRecipesModel {
+        AllRecipesModel(recipes: input.resultstoObject, offset: input.offset, number: input.number, totalResults: input.totalProducts)
     }
 }
 

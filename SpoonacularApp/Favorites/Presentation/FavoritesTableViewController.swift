@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FavoritesTableViewControllerProtocol: AnyObject {
+    
+}
+
 class FavoritesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -10,5 +10,5 @@ import Foundation
 struct FavoriteRecipe {
     var id: Int? = nil
     var title: String? = nil
-    var image: String? = nil
+    var image: Data? = nil
 }

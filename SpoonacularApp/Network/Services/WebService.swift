@@ -37,12 +37,16 @@ class WebService<ReturnType: Decodable, Endpoint: BaseEndpoint> {
             switch response.result {
             case .success(let data):
                 guard let data = data else {
-                    completion(nil, .emptyResponse)
+                    DispatchQueue.main.async {
+                        completion(nil, .emptyResponse)
+                    }
                     return
                 }
                 
                 guard let result = try? JSONDecoder().decode(ReturnType.self, from: data) else {
-                    completion(nil, .unexpectedResponseFormat)
+                    DispatchQueue.main.async {
+                        completion(nil, .unexpectedResponseFormat)
+                    }
                     return
                 }
                 
@@ -50,7 +54,9 @@ class WebService<ReturnType: Decodable, Endpoint: BaseEndpoint> {
                     completion(result, nil)
                 }
             case .failure(_):
-                completion(nil, .unexpectedError)
+                DispatchQueue.main.async {
+                    completion(nil, .unexpectedError)
+                }
             }
             
         }
