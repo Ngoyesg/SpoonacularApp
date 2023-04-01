@@ -58,6 +58,8 @@
 		B9CC12FD29D33E47006711C7 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC12FC29D33E47006711C7 /* DatabaseManager.swift */; };
 		B9CC130129D36451006711C7 /* FavoriteRecipeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC130029D36451006711C7 /* FavoriteRecipeObject.swift */; };
 		B9CC130429D36612006711C7 /* FavoriteRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC130329D36612006711C7 /* FavoriteRecipe.swift */; };
+		B9CEC62A29D85FDF0016961B /* DBFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CEC62929D85FDF0016961B /* DBFacade.swift */; };
+		B9CEC62C29D8632B0016961B /* WebServicesFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CEC62B29D8632B0016961B /* WebServicesFacade.swift */; };
 		B9F02DEF29D37C150035507E /* DetailedRecipeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F02DEE29D37C150035507E /* DetailedRecipeAPI.swift */; };
 		B9F02DFD29D37CFD0035507E /* IngredientsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F02DF129D37CFC0035507E /* IngredientsAPI.swift */; };
 		B9F02DFE29D37CFD0035507E /* ExtendedIngredientsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F02DF229D37CFD0035507E /* ExtendedIngredientsAPI.swift */; };
@@ -164,6 +166,8 @@
 		B9CC12FC29D33E47006711C7 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		B9CC130029D36451006711C7 /* FavoriteRecipeObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipeObject.swift; sourceTree = "<group>"; };
 		B9CC130329D36612006711C7 /* FavoriteRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipe.swift; sourceTree = "<group>"; };
+		B9CEC62929D85FDF0016961B /* DBFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFacade.swift; sourceTree = "<group>"; };
+		B9CEC62B29D8632B0016961B /* WebServicesFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServicesFacade.swift; sourceTree = "<group>"; };
 		B9F02DEE29D37C150035507E /* DetailedRecipeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedRecipeAPI.swift; sourceTree = "<group>"; };
 		B9F02DF129D37CFC0035507E /* IngredientsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsAPI.swift; sourceTree = "<group>"; };
 		B9F02DF229D37CFD0035507E /* ExtendedIngredientsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedIngredientsAPI.swift; sourceTree = "<group>"; };
@@ -321,6 +325,8 @@
 				B95E25FA29D6494E0040F772 /* RecipesRetrieverUseCase.swift */,
 				B95E25FC29D649790040F772 /* SavingFavoriteUseCase.swift */,
 				B95E260B29D663F40040F772 /* DeleteFavoriteUseCase.swift */,
+				B9CEC62929D85FDF0016961B /* DBFacade.swift */,
+				B9CEC62B29D8632B0016961B /* WebServicesFacade.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -757,6 +763,7 @@
 				B95E260C29D663F40040F772 /* DeleteFavoriteUseCase.swift in Sources */,
 				B946E48329CFBF3F00315FF2 /* EndpointError.swift in Sources */,
 				B9F02E0029D37CFD0035507E /* CaloricBreakdownAPI.swift in Sources */,
+				B9CEC62C29D8632B0016961B /* WebServicesFacade.swift in Sources */,
 				B93DD79329D4F0750098B2D7 /* GetRecipesWebService.swift in Sources */,
 				B970213229D6215E004A68B6 /* FilteredRecipesAPIToModelMap.swift in Sources */,
 				B93DD78D29D49F8C0098B2D7 /* DBGetManager.swift in Sources */,
@@ -774,6 +781,7 @@
 				B9A6D61629D7556A002DDFD6 /* RecipesUseCase.swift in Sources */,
 				B9F5035729CD040800B7D13C /* Utils.swift in Sources */,
 				B9F02E1929D38D100035507E /* DetailedRecipeModel.swift in Sources */,
+				B9CEC62A29D85FDF0016961B /* DBFacade.swift in Sources */,
 				B9A6D61829D76D44002DDFD6 /* RecipeCell.swift in Sources */,
 				B9F02E1D29D38FC00035507E /* Recipe.swift in Sources */,
 				B9F02E0829D37CFD0035507E /* WeightPerServingAPI.swift in Sources */,

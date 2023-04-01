@@ -36,12 +36,10 @@ extension RecipesRetrieverUseCase: RecipesRetrieverUseCaseProtocol {
             
             if error != nil {
                 completion(nil, nil, .unexpectedError)
-                return
             }
             
             if let allrecipes = allrecipes {
                 self.imagesRetrieverService.getRecipesWithThumbnails(from: allrecipes, completion: completion)
-               return
             }
         }
     }

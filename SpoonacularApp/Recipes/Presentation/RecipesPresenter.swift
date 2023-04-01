@@ -16,143 +16,87 @@ protocol RecipesPresenterProtocol: AnyObject {
     func handleDeleteFromFavorites(at index: Int)
     func procesOnSearchFilteredRecipeTapped(with keywords: String?)
     func fetchAllRecipes()
-    func loadMore()
+    func restartFetchingHistory()
 }
 
 class RecipesPresenter {
     
     weak var controller: RecipesViewControllerProtocol?
+    var webServiceFacade: WebServicesFacadeProtocol
+    var dbFacade: DBFacadeProtocol
     
-    var filteringUseCase: FilteringUseCaseProtocol
-    var recipesRetrieverUseCase: RecipesRetrieverUseCaseProtocol
-    var saveFavoriteUseCase: SaveFavoriteUseCaseProtocol
-    var deleteFavoriteUseCase: DeleteFavoriteUseCase
-    var mapperRecipesToDisplay: MapRecipeToDisplayProtocol
-    
-    var headDownloadedElements = 0
-    var isFetchingAllData: Bool = false
-    var lastKeywordSearched: String?
+    var offset = 0
+    var limitNumber = 25
     var recipesToDisplay: [RecipeToDisplay] = []
-
     
-    init(filteringUseCase: FilteringUseCaseProtocol, recipesRetrieverUseCase: RecipesRetrieverUseCaseProtocol, saveFavoriteUseCase: SaveFavoriteUseCaseProtocol, deleteFavoriteUseCase: DeleteFavoriteUseCase, mapperRecipesToDisplay: MapRecipeToDisplayProtocol) {
-        self.filteringUseCase = filteringUseCase
-        self.recipesRetrieverUseCase = recipesRetrieverUseCase
-        self.saveFavoriteUseCase = saveFavoriteUseCase
-        self.deleteFavoriteUseCase = deleteFavoriteUseCase
-        self.mapperRecipesToDisplay = mapperRecipesToDisplay
+    private let dispatchQueue = DispatchQueue(label: "Serial tasks")
+    private let semaphore = DispatchSemaphore(value: 1)
+        
+    init(webServiceFacade: WebServicesFacadeProtocol, dbFacade: DBFacadeProtocol) {
+        self.webServiceFacade = webServiceFacade
+        self.dbFacade = dbFacade
     }
- 
     
-    func getUnfilteredRecipes() {
-        isFetchingAllData = true
-
-        recipesRetrieverUseCase.getRecipesToDisplay(from: headDownloadedElements, to: headDownloadedElements + Constants.recipesPerDownload) { [weak self] allInfo, recipesToDisplay, error in
+        
+    func updateData(information: AllRecipesModel, recipes: [RecipeToDisplay]){
+        offset = information.number ?? offset + (information.totalResults ?? 0)
+        recipesToDisplay =  recipes
+    }
+    
+    func getAllRecipes(){
+        webServiceFacade.getUnfilteredRecipes(from: offset, to: limitNumber) { [weak self] generalInfo, recipes in
             guard let self = self else {
-                self?.processDownloadFailed()
+                self?.controller?.stopSpinner()
+                self?.controller?.alertProcessStatus(for: .downloading, status: .failure)
                 return
             }
-
-            if error != nil {
-                self.processDownloadFailed()
-                return
+            if let generalInfo = generalInfo, let recipes = recipes {
+                self.updateData(information: generalInfo, recipes: recipes)
+                self.controller?.stopSpinner()
+                self.controller?.reloadTable()
+            } else {
+                self.controller?.stopSpinner()
+                self.controller?.alertProcessStatus(for: .downloading, status: .failure)
             }
-
-            if let allInfo = allInfo, let recipesToDisplay = recipesToDisplay {
-                self.processDownloadSucceded(information: allInfo, recipes: recipesToDisplay)
-                return
-            }
+            
         }
     }
-
+    
     func getFilteredRecipes(search keyword: String) {
-        
-        isFetchingAllData = false
-        lastKeywordSearched = keyword
-        
-        filteringUseCase.getRecipesToDisplay(search: keyword) { [weak self] allInfo, recipesToDisplay, error in
+        webServiceFacade.getFilteredRecipes(search: keyword) { [weak self] generalInfo, recipes in
             guard let self = self else {
-                self?.processDownloadFailed()
+                self?.controller?.stopSpinner()
+                self?.controller?.alertProcessStatus(for: .downloading, status: .failure)
                 return
             }
-            
-            if error != nil {
-                self.processDownloadFailed()
-                return
-            }
-            
-            if let allInfo = allInfo, let recipesToDisplay = recipesToDisplay {
-                self.processDownloadSucceded(information: allInfo, recipes: recipesToDisplay)
-                return
+            if let generalInfo = generalInfo, let recipes = recipes {
+                self.updateData(information: generalInfo, recipes: recipes)
+                self.controller?.stopSpinner()
+                self.controller?.reloadTable()
+            } else {
+                self.controller?.stopSpinner()
+                self.controller?.alertProcessStatus(for: .downloading, status: .failure)
             }
         }
     }
     
     func saveFavorite(recipe: RecipeToDisplay){
-        saveFavoriteUseCase.save(recipe) { [weak self] success, error in
+        dbFacade.saveFavorite(recipe: recipe) { [weak self] status in
             guard let self = self else {
                 self?.processModifyingFavoriteStatus(status: .failure)
                 return
             }
-            
-            if error != nil {
-                self.processModifyingFavoriteStatus(status: .failure)
-                return
-            }
-            
-            self.processModifyingFavoriteStatus(status: .success)
+            self.processModifyingFavoriteStatus(status: status)
         }
     }
     
     func deleteFavoriteRecipe(recipe: RecipeToDisplay){
-        deleteFavoriteUseCase.delete(recipe) { [weak self] success, error in
+        dbFacade.deleteFavoriteRecipe(recipe: recipe) { [weak self] status in
             guard let self = self else {
                 self?.processModifyingFavoriteStatus(status: .failure)
                 return
             }
-            
-            if error != nil {
-                self.processModifyingFavoriteStatus(status: .failure)
-                return
-            }
-            
-            self.processModifyingFavoriteStatus(status: .success)
-        }
-    }
-    
-    func restartFetchingHistory() {
-       headDownloadedElements = 0
-       recipesToDisplay = []
-    }
-        
-    func updateHeadDownloadedElements(information: AllRecipesModel){
-        if let number = information.number {
-            headDownloadedElements = number
-        } else {
-            let totalResults =  information.recipes?.count ?? 0
-            headDownloadedElements += totalResults
-        }
-    }
-    
-    func updateRecipesToDisplay(recipes: [RecipeWithImageModel]) {
-        let transformed = recipes.map { mapperRecipesToDisplay.convert($0)}
-        recipesToDisplay += transformed
-    }
-    
-    
-    func processDownloadFailed(){
-        DispatchQueue.main.async {
-            self.controller?.stopSpinner()
-            self.controller?.alertProcessStatus(for: .downloading, status: .failure)
-        }
-    }
-    
-    func processDownloadSucceded(information: AllRecipesModel, recipes: [RecipeWithImageModel]) {
-        DispatchQueue.main.async {
-            self.updateHeadDownloadedElements(information: information)
-            self.updateRecipesToDisplay(recipes: recipes)
-            self.controller?.stopSpinner()
-            self.controller?.reloadTable()
+            self.processModifyingFavoriteStatus(status: status)
         }
     }
     
@@ -164,29 +108,22 @@ class RecipesPresenter {
         }
     }
     
-    
-    func clearDataAndReloadTable(){
-        restartFetchingHistory()
-        controller?.reloadTable()
-    }
 }
 
 extension RecipesPresenter: RecipesPresenterProtocol {
     
-    
-    
     func setController(_ viewController: RecipesViewControllerProtocol?) {
         self.controller = viewController
     }
-        
+    
     func getTotalOfRecipes() -> Int {
         recipesToDisplay.count
     }
-
+    
     func getRecipeForRow(at row: Int) -> RecipeToDisplay {
         recipesToDisplay[row]
     }
- 
+    
     func recipeWasSelected(at row: Int) {
         if let recipeToSend = recipesToDisplay[row].id {
             controller?.setIDToSend(with: recipeToSend)
@@ -204,32 +141,24 @@ extension RecipesPresenter: RecipesPresenterProtocol {
     func handleDeleteFromFavorites(at index: Int) {
         let favoriteRecipe = recipesToDisplay[index]
         deleteFavoriteRecipe(recipe: favoriteRecipe)
-        recipesToDisplay[index].updateRecipeFavoriteStatus(status: true)
-
+        recipesToDisplay[index].updateRecipeFavoriteStatus(status: false)
     }
     
+    func restartFetchingHistory() {
+        offset = 0
+        limitNumber = 25
+        recipesToDisplay = []
+    }
+    
+    
     func procesOnSearchFilteredRecipeTapped(with keywords: String?) {
-        DispatchQueue.main.async {
-            self.clearDataAndReloadTable()
-            self.controller?.startSpinner()
-        }
-        
-        if let keywords = keywords {
-            getFilteredRecipes(search: keywords)
-        }
+        controller?.startSpinner()
+        restartFetchingHistory()
+        getFilteredRecipes(search: keywords ?? "")
     }
     
     func fetchAllRecipes() {
         controller?.startSpinner()
-        //getUnfilteredRecipes()
+        getAllRecipes()
     }
-    
-    func loadMore() {
-        if isFetchingAllData {
-            //getUnfilteredRecipes()
-        } else if let lastKeyword = lastKeywordSearched {
-            getFilteredRecipes(search: lastKeyword)
-        }
-    }
-    
 }

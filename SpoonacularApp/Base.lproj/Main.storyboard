@@ -88,33 +88,46 @@
                                 <rect key="frame" x="20" y="167" width="353" height="582"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" textLabel="10k-86-UFN" detailTextLabel="6fd-Bi-Yus" imageView="cxV-PX-Cg4" rowHeight="60" style="IBUITableViewCellStyleValue1" id="ldc-4b-N1q">
-                                        <rect key="frame" x="0.0" y="50" width="353" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="109" id="ldc-4b-N1q" customClass="RecipeCell" customModule="SpoonacularApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="353" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ldc-4b-N1q" id="uBk-iY-vgY">
-                                            <rect key="frame" x="0.0" y="0.0" width="353" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="109"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="10k-86-UFN">
-                                                    <rect key="frame" x="20" y="22" width="28.333333333333332" height="17"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aR9-cK-48q">
+                                                    <rect key="frame" x="15" y="15" width="88.333333333333329" height="79"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RecipeLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPU-hU-TG7">
+                                                    <rect key="frame" x="108.33333333333333" y="26" width="169.33333333333337" height="57"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6fd-Bi-Yus">
-                                                    <rect key="frame" x="300.33333333333331" y="24" width="32.666666666666664" height="14.333333333333334"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cxV-PX-Cg4">
-                                                    <rect key="frame" x="21" y="19.333333333333332" width="22" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eyZ-hp-WoF">
+                                                    <rect key="frame" x="282.66666666666669" y="26" width="35.333333333333314" height="57"/>
                                                 </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="eyZ-hp-WoF" firstAttribute="top" secondItem="uBk-iY-vgY" secondAttribute="topMargin" constant="15" id="CPA-h6-K1T"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="lPU-hU-TG7" secondAttribute="bottom" constant="15" id="Jz1-Xv-aIW"/>
+                                                <constraint firstItem="aR9-cK-48q" firstAttribute="top" secondItem="uBk-iY-vgY" secondAttribute="top" constant="15" id="KVI-Us-cDJ"/>
+                                                <constraint firstItem="aR9-cK-48q" firstAttribute="leading" secondItem="uBk-iY-vgY" secondAttribute="leading" constant="15" id="R9R-eZ-F40"/>
+                                                <constraint firstAttribute="bottom" secondItem="aR9-cK-48q" secondAttribute="bottom" constant="15" id="TTB-bx-rXG"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="eyZ-hp-WoF" secondAttribute="bottom" constant="15" id="c8q-Ya-xrF"/>
+                                                <constraint firstItem="lPU-hU-TG7" firstAttribute="leading" secondItem="aR9-cK-48q" secondAttribute="trailing" constant="5" id="dPc-NJ-YiE"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="eyZ-hp-WoF" secondAttribute="trailing" constant="15" id="dly-ZX-cIw"/>
+                                                <constraint firstItem="lPU-hU-TG7" firstAttribute="top" secondItem="uBk-iY-vgY" secondAttribute="topMargin" constant="15" id="eRO-3Q-ztJ"/>
+                                                <constraint firstItem="eyZ-hp-WoF" firstAttribute="width" secondItem="uBk-iY-vgY" secondAttribute="width" multiplier="0.1" id="fNE-Vv-dNL"/>
+                                                <constraint firstItem="eyZ-hp-WoF" firstAttribute="leading" secondItem="lPU-hU-TG7" secondAttribute="trailing" constant="5" id="iNW-ev-Sff"/>
+                                                <constraint firstItem="aR9-cK-48q" firstAttribute="width" secondItem="uBk-iY-vgY" secondAttribute="width" multiplier="0.25" id="loB-1C-ynT"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="favoriteStatus" destination="eyZ-hp-WoF" id="DvA-qt-hII"/>
+                                            <outlet property="recipeImage" destination="aR9-cK-48q" id="7sS-oT-05Y"/>
+                                            <outlet property="titleLabel" destination="lPU-hU-TG7" id="zlw-Gn-mev"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

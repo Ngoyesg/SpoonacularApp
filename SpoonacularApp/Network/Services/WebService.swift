@@ -10,7 +10,7 @@ import Foundation
 
 struct ContentTypeHeaders {
     static let json: HTTPHeaders = HTTPHeaders(arrayLiteral: HTTPHeader(name: "content-type", value: "application/json"))
-    static let image: HTTPHeaders = HTTPHeaders(arrayLiteral: HTTPHeader(name: "content-type", value: "image/jpeg"))
+    static let image: HTTPHeaders = HTTPHeaders(arrayLiteral: HTTPHeader(name: "content-type", value: "multipart/form-data"))
 }
 
 enum WebServiceError: Error {
@@ -18,8 +18,9 @@ enum WebServiceError: Error {
 }
 
 class WebService<ReturnType: Decodable, Endpoint: BaseEndpoint> {
-    private let manager: Session
     
+    private let manager: Session
+        
     init(manager: Session = Session.default) {
         self.manager = manager
     }
@@ -58,7 +59,38 @@ class WebService<ReturnType: Decodable, Endpoint: BaseEndpoint> {
                     completion(nil, .unexpectedError)
                 }
             }
-            
         }
     }
+    
+    func makeRequestForImage(endpoint: Endpoint, completion: @escaping (Data?, WebServiceError?)-> Void) {
+        
+        guard let url = try? endpoint.getURL() else {
+            completion(nil, .buildingEndpointFailed)
+            return
+        }
+        
+        manager.request(url, method: endpoint.getHTTPMethod(), parameters: nil, encoding: URLEncoding.default, headers: endpoint.getHeaders(), interceptor: nil).response {
+            
+            response in
+            
+            switch response.result {
+            case .success(let data):
+                guard let data = data else {
+                    DispatchQueue.main.async {
+                        completion(nil, .emptyResponse)
+                    }
+                    return
+                }
+                DispatchQueue.main.async {
+                    completion(data, nil)
+                }
+            case .failure(_):
+                DispatchQueue.main.async {
+                    completion(nil, .unexpectedError)
+                }
+            }
+        }
+        
+    }
+    
 }

@@ -40,6 +40,14 @@ class RecipesViewController: UIViewController {
         self.presenter?.fetchAllRecipes()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.presenter?.fetchAllRecipes()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.presenter?.restartFetchingHistory()
+    }
+    
     @IBAction func onSearchRecipeButtonTapped(){
         self.presenter?.procesOnSearchFilteredRecipeTapped(with: filterRecipeTextField.text)
     }
@@ -91,29 +99,28 @@ extension RecipesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constant.tableViewCellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constant.tableViewCellIdentifier, for: indexPath) as! RecipeCellProtocol
                 
         let recipe = presenter?.getRecipeForRow(at: indexPath.row)
         
-        var content = cell.defaultContentConfiguration()
+//        var content = cell.defaultContentConfiguration()
+//
+//        content.text = recipe?.title
+//        content.textProperties.numberOfLines = 0
+//
+//        content.secondaryText = (recipe?.isFavorite ?? false ) ? "􀊵" : nil
+//
+//        if let image = recipe?.image {
+//            content.image = UIImage(data: image)
+//        } else {
+//            content.image = UIImage(systemName: "questionmark.square")
+//        }
+//
+//        cell.contentConfiguration = content
+        cell.setTitle(recipe?.title)
+        cell.setImage(recipe?.image)
+        cell.toggleFavoriteStatus(to: recipe?.isFavorite ?? false)
         
-        content.text = recipe?.title
-        content.textProperties.numberOfLines = 0
-        
-        content.secondaryText = (recipe?.isFavorite ?? false ) ? "★" : nil
-        
-        if let image = recipe?.image {
-            content.image = UIImage(data: image)
-        } else {
-            content.image = UIImage(systemName: "questionmark.square")
-        }
-        
-        cell.contentConfiguration = content
-        
-        if indexPath.row == self.presenter?.getTotalOfRecipes() ?? 0 - 1 {
-            presenter?.loadMore()
-        }
-                
         return cell
     }
     

@@ -34,6 +34,14 @@ class RecipesPresenterBuilder {
         
         let recipesRetrieverUseCase = RecipesRetrieverUseCase(recipesRetrieverService: recipesRetrieverService, imagesRetrieverService: imagesRetrieverService)
         
+        //Mapper
+        
+        let mapperRecipesToDisplay = MapRecipeToDisplay()
+        
+        //WebServiceFacade
+        
+        let webServiceFacade = WebServicesFacade(filteringUseCase: filteringUseCase, recipesRetrieverUseCase: recipesRetrieverUseCase, mapperRecipesToDisplay: mapperRecipesToDisplay)
+        
         //DB Saving use case
         let favoriteToObjectConverter = FavoriteRecipeToObject()
         
@@ -46,11 +54,10 @@ class RecipesPresenterBuilder {
         
         let deleteFavoriteUseCase = DeleteFavoriteUseCase(dbManagerDeleteService: dbManagerDeleteService)
         
-        //Mapper
-        
-        let mapperRecipesToDisplay = MapRecipeToDisplay()
+        //DBFacade
+        let dbFacade = DBFacade(saveFavoriteUseCase: saveFavoriteUseCase, deleteFavoriteUseCase: deleteFavoriteUseCase)
         
         // Return
-        return RecipesPresenter(filteringUseCase: filteringUseCase, recipesRetrieverUseCase: recipesRetrieverUseCase, saveFavoriteUseCase: saveFavoriteUseCase, deleteFavoriteUseCase: deleteFavoriteUseCase, mapperRecipesToDisplay: mapperRecipesToDisplay)
+        return RecipesPresenter(webServiceFacade: webServiceFacade, dbFacade: dbFacade)
     }
 }

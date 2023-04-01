@@ -55,7 +55,6 @@ extension GetRecipesWithImagesWebService: GetRecipesWithImageWebServiceProtocol 
                         let recipeWithImage = self.mapperFromRecipeService.mapWithImageData(from: recipe, and: nil)
                         self.recipesToReturn.append(recipeWithImage)
                         self.dispatchGroup.leave()
-                        return
                     }
                     
                     if let image = imageData {
