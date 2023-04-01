@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DetailsViewControllerProtocol: AnyObject {
-    
+    func receive(id: Int)
 }
 
 class DetailsViewController: UIViewController {

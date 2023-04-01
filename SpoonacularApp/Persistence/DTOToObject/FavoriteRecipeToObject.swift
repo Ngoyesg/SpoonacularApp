@@ -11,7 +11,7 @@ protocol FavoriteRecipeToObjectProtocol: AnyObject {
     func convert(_ input: FavoriteRecipe) -> FavoriteRecipeObject
 }
 
-class FavoriteRecipeToObject {
+class FavoriteRecipeToObject: FavoriteRecipeToObjectProtocol {
     func convert(_ input: FavoriteRecipe) -> FavoriteRecipeObject {
         let favoriteRecipeObject = FavoriteRecipeObject()
         favoriteRecipeObject.id = input.id

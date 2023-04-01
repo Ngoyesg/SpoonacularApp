@@ -11,7 +11,7 @@ protocol AllRecipesAPIToModelMapProtocol: AnyObject {
     func convert(_ input: AllRecipesAPI) -> AllRecipesModel
 }
 
-class AllRecipesAPIToModelMap {
+class AllRecipesAPIToModelMap: AllRecipesAPIToModelMapProtocol {
     func convert(_ input: AllRecipesAPI) -> AllRecipesModel {
         AllRecipesModel(recipes: input.resultstoObject, offset: input.offset, number: input.number, totalResults: input.totalResults)
     }

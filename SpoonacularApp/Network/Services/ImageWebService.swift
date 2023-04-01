@@ -22,7 +22,7 @@ class ImageWebService: WebService<Data, ImageRecipeEndpoint>, ImageWebServicePro
         
         makeRequest(endpoint: endpoint) { [weak self] results, error in
             
-            guard let self = self else {
+            guard let _ = self else {
                 completion(nil, .unexpectedError)
                 return
             }
@@ -32,10 +32,11 @@ class ImageWebService: WebService<Data, ImageRecipeEndpoint>, ImageWebServicePro
                 return
             }
             
-            if let results = results {
-                completion(results, nil)
-                return
-            }
+            completion(results, nil)
+//            if let results = results {
+//                completion(results, nil)
+//                return
+//            }
         }
     }
 }

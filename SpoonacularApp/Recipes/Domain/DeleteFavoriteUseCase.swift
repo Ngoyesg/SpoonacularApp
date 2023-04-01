@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DeleteFavoriteUseCaseProtocol: AnyObject {
-    func delete(_ recipeWithImageData: RecipeWithImageModel, completion: @escaping((DBManagerResultStatus?, DBManagerError?) -> Void))
+    func delete(_ recipeWithImageData: RecipeToDisplay, completion: @escaping((DBManagerResultStatus?, DBManagerError?) -> Void))
 }
 
 class DeleteFavoriteUseCase {
@@ -19,7 +19,7 @@ class DeleteFavoriteUseCase {
         self.dbManagerDeleteService = dbManagerDeleteService
     }
     
-    func mapRecipeToFavorite(_ recipe: RecipeWithImageModel) -> FavoriteRecipe {
+    func mapRecipeToFavorite(_ recipe: RecipeToDisplay) -> FavoriteRecipe {
         FavoriteRecipe(id: recipe.id, title: recipe.title, image: recipe.image)
     }
     
@@ -27,7 +27,7 @@ class DeleteFavoriteUseCase {
 
 extension DeleteFavoriteUseCase: DeleteFavoriteUseCaseProtocol {
  
-    func delete(_ recipeWithImageData: RecipeWithImageModel, completion: @escaping((DBManagerResultStatus?, DBManagerError?) -> Void)) {
+    func delete(_ recipeWithImageData: RecipeToDisplay, completion: @escaping((DBManagerResultStatus?, DBManagerError?) -> Void)) {
         
         let favoriteRecipe = mapRecipeToFavorite(recipeWithImageData)
         

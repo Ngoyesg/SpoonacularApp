@@ -12,7 +12,7 @@ protocol DBDeleteManagerProtocol: AnyObject {
     func deleteAll() throws
 }
 
-class DBDeleteManager: DBManager {
+class DBDeleteManager: DBManager, DBDeleteManagerProtocol {
     
     let converter: FavoriteRecipeToObjectProtocol
     

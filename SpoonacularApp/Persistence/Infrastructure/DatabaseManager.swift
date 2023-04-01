@@ -12,8 +12,9 @@ enum DBManagerError: Error {
     case unableToAddObject, unableToDeleteObject, unableToRetriveData, unableToDeleteData, unexpectedError
 }
 
-enum DBManagerResultStatus {
-    case success, failure
+enum DBManagerResultStatus: String {
+    case failure = "Error"
+    case success = "Success"
 }
 
 class DBManager {

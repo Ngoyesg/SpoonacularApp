@@ -41,7 +41,7 @@ extension RecipesRetrieverUseCase: RecipesRetrieverUseCaseProtocol {
             
             if let allrecipes = allrecipes {
                 self.imagesRetrieverService.getRecipesWithThumbnails(from: allrecipes, completion: completion)
-                return
+               return
             }
         }
     }

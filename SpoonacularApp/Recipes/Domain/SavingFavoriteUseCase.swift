@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SaveFavoriteUseCaseProtocol: AnyObject {
-    func save(_ recipeWithImageData: RecipeWithImageModel, completion: @escaping((DBManagerResultStatus?, DBManagerError?) -> Void))
+    func save(_ recipeWithImageData: RecipeToDisplay, completion: @escaping((DBManagerResultStatus?, DBManagerError?) -> Void))
 }
 
 class SaveFavoriteUseCase {
@@ -19,7 +19,7 @@ class SaveFavoriteUseCase {
         self.dbManagerAddService = dbManagerAddService
     }
     
-    func mapRecipeToFavorite(_ recipe: RecipeWithImageModel) -> FavoriteRecipe {
+    func mapRecipeToFavorite(_ recipe: RecipeToDisplay) -> FavoriteRecipe {
         FavoriteRecipe(id: recipe.id, title: recipe.title, image: recipe.image)
     }
     
@@ -27,7 +27,7 @@ class SaveFavoriteUseCase {
 
 extension SaveFavoriteUseCase: SaveFavoriteUseCaseProtocol {
  
-    func save(_ recipeWithImageData: RecipeWithImageModel, completion: @escaping((DBManagerResultStatus?, DBManagerError?) -> Void)) {
+    func save(_ recipeWithImageData: RecipeToDisplay, completion: @escaping((DBManagerResultStatus?, DBManagerError?) -> Void)) {
         
         let favoriteRecipe = mapRecipeToFavorite(recipeWithImageData)
         

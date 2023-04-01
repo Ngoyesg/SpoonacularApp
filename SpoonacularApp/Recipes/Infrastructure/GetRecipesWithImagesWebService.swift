@@ -41,6 +41,7 @@ extension GetRecipesWithImagesWebService: GetRecipesWithImageWebServiceProtocol 
                 self.dispatchGroup.enter()
                 guard let imageURL = recipe.image else {
                     completion(nil, nil, .unexpectedError)
+                    self.dispatchGroup.leave()
                     return
                 }
                 self.getImageService.getImage(for: imageURL) { [weak self] imageData, error in
@@ -51,12 +52,14 @@ extension GetRecipesWithImagesWebService: GetRecipesWithImageWebServiceProtocol 
                     }
                     
                     if error != nil {
-                        self.error = true
+                        let recipeWithImage = self.mapperFromRecipeService.mapWithImageData(from: recipe, and: nil)
+                        self.recipesToReturn.append(recipeWithImage)
                         self.dispatchGroup.leave()
                         return
                     }
                     
                     if let image = imageData {
+                        self.error = false
                         let recipeWithImage = self.mapperFromRecipeService.mapWithImageData(from: recipe, and: image)
                         self.recipesToReturn.append(recipeWithImage)
                         self.dispatchGroup.leave()
