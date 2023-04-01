@@ -21,7 +21,7 @@ class RecipeCell: UITableViewCell {
     @IBOutlet weak var recipeImage: UIImageView!
     
     @IBOutlet weak var favoriteStatus: UIImageView!
-        
+    
 }
 
 extension RecipeCell: RecipeCellProtocol {
@@ -41,10 +41,11 @@ extension RecipeCell: RecipeCellProtocol {
     func toggleFavoriteStatus(to status: Bool) {
          
         if status {
-            favoriteStatus.isHidden = false
-            favoriteStatus.image = UIImage(systemName: "star.circle.fill")
+            favoriteStatus.image = UIImage(systemName: "star.fill")
+            favoriteStatus.tintColor = .systemYellow
         } else {
-            favoriteStatus.isHidden = true
+            favoriteStatus.image = UIImage(systemName: "star.slash.fill")
+            favoriteStatus.tintColor = .lightGray
         }
     }
 }

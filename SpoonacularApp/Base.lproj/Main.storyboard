@@ -88,24 +88,24 @@
                                 <rect key="frame" x="20" y="167" width="353" height="582"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="109" id="ldc-4b-N1q" customClass="RecipeCell" customModule="SpoonacularApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="353" height="109"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="110" id="ldc-4b-N1q" customClass="RecipeCell" customModule="SpoonacularApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="353" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ldc-4b-N1q" id="uBk-iY-vgY">
-                                            <rect key="frame" x="0.0" y="0.0" width="353" height="109"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aR9-cK-48q">
-                                                    <rect key="frame" x="15" y="15" width="88.333333333333329" height="79"/>
+                                                    <rect key="frame" x="15" y="15" width="88.333333333333329" height="80"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RecipeLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPU-hU-TG7">
-                                                    <rect key="frame" x="108.33333333333333" y="26" width="169.33333333333337" height="57"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RecipeLabel" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPU-hU-TG7">
+                                                    <rect key="frame" x="108.33333333333331" y="26" width="187" height="58"/>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eyZ-hp-WoF">
-                                                    <rect key="frame" x="282.66666666666669" y="26" width="35.333333333333314" height="57"/>
+                                                    <rect key="frame" x="300.33333333333331" y="26" width="17.666666666666686" height="58"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -118,7 +118,7 @@
                                                 <constraint firstItem="lPU-hU-TG7" firstAttribute="leading" secondItem="aR9-cK-48q" secondAttribute="trailing" constant="5" id="dPc-NJ-YiE"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="eyZ-hp-WoF" secondAttribute="trailing" constant="15" id="dly-ZX-cIw"/>
                                                 <constraint firstItem="lPU-hU-TG7" firstAttribute="top" secondItem="uBk-iY-vgY" secondAttribute="topMargin" constant="15" id="eRO-3Q-ztJ"/>
-                                                <constraint firstItem="eyZ-hp-WoF" firstAttribute="width" secondItem="uBk-iY-vgY" secondAttribute="width" multiplier="0.1" id="fNE-Vv-dNL"/>
+                                                <constraint firstItem="eyZ-hp-WoF" firstAttribute="width" secondItem="uBk-iY-vgY" secondAttribute="width" multiplier="0.05" id="fNE-Vv-dNL"/>
                                                 <constraint firstItem="eyZ-hp-WoF" firstAttribute="leading" secondItem="lPU-hU-TG7" secondAttribute="trailing" constant="5" id="iNW-ev-Sff"/>
                                                 <constraint firstItem="aR9-cK-48q" firstAttribute="width" secondItem="uBk-iY-vgY" secondAttribute="width" multiplier="0.25" id="loB-1C-ynT"/>
                                             </constraints>

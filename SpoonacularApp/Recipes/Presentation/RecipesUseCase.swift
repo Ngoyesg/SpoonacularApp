@@ -9,7 +9,7 @@ import Foundation
 
 enum RecipesUseCase: String {
     case downloading = "Downloading information"
-    case modifying = "Modifying favorite recipe"
+    case modifying = "Action successfully done"
 }
 
 enum RecipesUseCaseStatus: String {

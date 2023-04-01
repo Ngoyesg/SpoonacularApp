@@ -29,6 +29,7 @@ class RecipesViewController: UIViewController {
     struct Constant {
         static let tableViewCellIdentifier = "RecipeCell"
         static let segueToRecipeDetails = "ToRecipeDetails"
+        static let rowHeight = 110.0
     }
     
     override func viewDidLoad() {
@@ -120,7 +121,6 @@ extension RecipesViewController: UITableViewDelegate, UITableViewDataSource {
         cell.setTitle(recipe?.title)
         cell.setImage(recipe?.image)
         cell.toggleFavoriteStatus(to: recipe?.isFavorite ?? false)
-        
         return cell
     }
     
