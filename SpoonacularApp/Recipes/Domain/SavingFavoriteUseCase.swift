@@ -20,7 +20,7 @@ class SaveFavoriteUseCase {
     }
     
     func mapRecipeToFavorite(_ recipe: RecipeToDisplay) -> FavoriteRecipe {
-        FavoriteRecipe(id: recipe.id, title: recipe.title, image: recipe.image)
+        FavoriteRecipe(id: recipe.id, title: recipe.title ?? "", image: recipe.image)
     }
     
 }

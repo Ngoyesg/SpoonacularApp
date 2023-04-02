@@ -20,6 +20,6 @@ struct RecipesAPI: Codable {
 
 extension RecipesAPI {
     var toObject: Recipe {
-        Recipe(id: self.id, title: self.title, image: self.image)
+        Recipe(id: self.id ?? 0, title: self.title, image: self.image)
     }
 }

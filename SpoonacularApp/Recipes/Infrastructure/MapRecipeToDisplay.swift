@@ -8,12 +8,11 @@
 import Foundation
 
 protocol MapRecipeToDisplayProtocol: AnyObject {
-    func convert(_ input: RecipeWithImageModel) -> RecipeToDisplay
+    func convert(_ input: RecipeWithImageModel, checkIsFavorite: (Int) -> Bool) -> RecipeToDisplay
 }
 
 class MapRecipeToDisplay: MapRecipeToDisplayProtocol {
-    
-    func convert(_ input: RecipeWithImageModel) -> RecipeToDisplay {
-        RecipeToDisplay(id: input.id, title: input.title, image: input.image, isFavorite: false)
+    func convert(_ input: RecipeWithImageModel, checkIsFavorite: (Int) -> Bool) -> RecipeToDisplay {
+        RecipeToDisplay(id: input.id, title: input.title, image: input.image, isFavorite: checkIsFavorite(input.id))
     }
 }

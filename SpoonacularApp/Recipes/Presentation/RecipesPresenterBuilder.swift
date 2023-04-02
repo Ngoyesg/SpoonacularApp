@@ -9,6 +9,9 @@ import Foundation
 
 class RecipesPresenterBuilder {
     
+    func getFilteringUseCase() {
+        #warning("Organizar esto")
+    }
     func build() -> RecipesPresenter {
         
         //Common webService
@@ -16,7 +19,7 @@ class RecipesPresenterBuilder {
         
         let getRecipesService = GetRecipesWebService(converter: apiToModelConverter)
         
-        let getImageService = ImageWebService()
+        let getImageService = ImageWebService(responseDecoder: ImageDecoder())
         
         let mapperFromRecipeService = RecipesToRecipesWithImages()
         
@@ -27,12 +30,12 @@ class RecipesPresenterBuilder {
         
         let filteredRecipesRetrieverService = FilteredRecipesWebService(converter: filterConverter)
         
-        let filteringUseCase = FilteringUseCase(filteredRecipesRetrieverService: filteredRecipesRetrieverService, imagesRetrieverService: imagesRetrieverService)
+        let filteringUseCase = FilteringUseCaseStep(filteredRecipesRetrieverService: filteredRecipesRetrieverService, imagesRetrieverService: imagesRetrieverService)
         
         //All Recipes use case
         let recipesRetrieverService = GetRecipesWebService(converter: apiToModelConverter)
         
-        let recipesRetrieverUseCase = RecipesRetrieverUseCase(recipesRetrieverService: recipesRetrieverService, imagesRetrieverService: imagesRetrieverService)
+        let recipesRetrieverUseCase = RecipesRetrieverUseCaseStep(recipesRetrieverService: recipesRetrieverService, imagesRetrieverService: imagesRetrieverService)
         
         //Mapper
         
@@ -40,7 +43,11 @@ class RecipesPresenterBuilder {
         
         //WebServiceFacade
         
-        let webServiceFacade = WebServicesFacade(filteringUseCase: filteringUseCase, recipesRetrieverUseCase: recipesRetrieverUseCase, mapperRecipesToDisplay: mapperRecipesToDisplay)
+        let favoriteRecipeFromObjectConverter = FavoriteRecipeFromObject()
+        let dbGetManager = DBGetManager(converter: favoriteRecipeFromObjectConverter)
+        let getLocalRecipeUseCase = GetLocalRecipeUseCaseStep(dbGetManager: dbGetManager)
+        
+        let fetchRecipesUseCase = FetchRecipesUseCase(filteringUseCase: filteringUseCase, recipesRetrieverUseCase: recipesRetrieverUseCase, mapperRecipesToDisplay: mapperRecipesToDisplay, getLocalRecipeUseCase: getLocalRecipeUseCase)
         
         //DB Saving use case
         let favoriteToObjectConverter = FavoriteRecipeToObject()
@@ -58,6 +65,6 @@ class RecipesPresenterBuilder {
         let dbFacade = DBFacade(saveFavoriteUseCase: saveFavoriteUseCase, deleteFavoriteUseCase: deleteFavoriteUseCase)
         
         // Return
-        return RecipesPresenter(webServiceFacade: webServiceFacade, dbFacade: dbFacade)
+        return RecipesPresenter(fetchRecipesUseCase: fetchRecipesUseCase, dbFacade: dbFacade)
     }
 }

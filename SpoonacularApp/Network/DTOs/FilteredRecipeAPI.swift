@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct FilteredRecipesAPI: Codable {
+struct FilteredRecipesAPI: Codable, DecodableAPIResponse {
 
   var type             : String?     = nil
   var recipes         : [RecipesAPI]? = []

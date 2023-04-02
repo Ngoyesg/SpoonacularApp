@@ -9,7 +9,7 @@ import Foundation
 
 struct RecipeWithImageModel {
     
-    var id: Int?    = nil
+    var id: Int
     var title: String? = nil
     var image: Data? = nil
     

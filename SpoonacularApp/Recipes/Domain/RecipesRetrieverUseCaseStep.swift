@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol RecipesRetrieverUseCaseProtocol: AnyObject {
+protocol RecipesRetrieverUseCaseStepProtocol: AnyObject {
     func getRecipesToDisplay(from offset: Int, to number: Int, completion: @escaping (AllRecipesModel?, [RecipeWithImageModel]?, WebServiceError?) -> Void)
 }
 
-class RecipesRetrieverUseCase {
+class RecipesRetrieverUseCaseStep {
     
     private let recipesRetrieverService: GetRecipesWebServiceProtocol
     private let imagesRetrieverService: GetRecipesWithImageWebServiceProtocol
@@ -23,7 +23,7 @@ class RecipesRetrieverUseCase {
     
 }
 
-extension RecipesRetrieverUseCase: RecipesRetrieverUseCaseProtocol {
+extension RecipesRetrieverUseCaseStep: RecipesRetrieverUseCaseStepProtocol {
     
     func getRecipesToDisplay(from offset: Int, to number: Int, completion: @escaping (AllRecipesModel?, [RecipeWithImageModel]?, WebServiceError?) -> Void) {
         

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DetailedRecipeAPI: Codable {
+struct DetailedRecipeAPI: Codable, DecodableAPIResponse {
     
     var vegetarian               : Bool?                  = nil
     var vegan                    : Bool?                  = nil

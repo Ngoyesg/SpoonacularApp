@@ -14,8 +14,8 @@ protocol DBFacadeProtocol: AnyObject {
 
 class DBFacade {
     
-    var saveFavoriteUseCase: SaveFavoriteUseCaseProtocol
-    var deleteFavoriteUseCase: DeleteFavoriteUseCase
+    private let saveFavoriteUseCase: SaveFavoriteUseCaseProtocol
+    private let deleteFavoriteUseCase: DeleteFavoriteUseCase
     
     init(saveFavoriteUseCase: SaveFavoriteUseCaseProtocol, deleteFavoriteUseCase: DeleteFavoriteUseCase) {
         self.saveFavoriteUseCase = saveFavoriteUseCase
@@ -27,12 +27,7 @@ class DBFacade {
 extension DBFacade: DBFacadeProtocol {
     
     func saveFavorite(recipe: RecipeToDisplay, completion: @escaping (DBManagerResultStatus) -> Void){
-        saveFavoriteUseCase.save(recipe) { [weak self] success, error in
-            guard let _ = self else {
-                completion(.failure)
-                return
-            }
-            
+        saveFavoriteUseCase.save(recipe) { success, error in
             if error != nil {
                 completion(.failure)
                 return
@@ -42,12 +37,7 @@ extension DBFacade: DBFacadeProtocol {
     }
     
     func deleteFavoriteRecipe(recipe: RecipeToDisplay, completion: @escaping (DBManagerResultStatus) -> Void){
-        deleteFavoriteUseCase.delete(recipe) { [weak self] success, error in
-            guard let _ = self else {
-                completion(.failure)
-                return
-            }
-            
+        deleteFavoriteUseCase.delete(recipe) { success, error in
             if error != nil {
                 completion(.failure)
                 return

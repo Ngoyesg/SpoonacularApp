@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 enum DBManagerError: Error {
-    case unableToAddObject, unableToDeleteObject, unableToRetriveData, unableToDeleteData, unexpectedError
+    case unableToAddObject, unableToDeleteObject, unableToRetriveData, unableToDeleteData, unexpectedError, objectNotFound
 }
 
 enum DBManagerResultStatus: String {

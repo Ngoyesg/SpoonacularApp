@@ -17,12 +17,30 @@ enum WebServiceError: Error {
     case unableToFetchData, buildingEndpointFailed, unexpectedResponseFormat, emptyResponse, unexpectedError
 }
 
+protocol APIResponseDecodable {
+    func decode(data: Data) -> Any?
+}
+
+class AnyResponseDecoder<ReturnType: Decodable>: APIResponseDecodable {
+    func decode(data: Data) -> Any? {
+        try? JSONDecoder().decode(ReturnType.self, from: data)
+    }
+}
+
+class ImageDecoder: APIResponseDecodable {
+    func decode(data: Data) -> Any? {
+        data
+    }
+}
+
 class WebService<ReturnType: Decodable, Endpoint: BaseEndpoint> {
     
     private let manager: Session
-        
-    init(manager: Session = Session.default) {
+    private let responseDecoder: APIResponseDecodable
+    
+    init(responseDecoder: APIResponseDecodable, manager: Session = Session.default) {
         self.manager = manager
+        self.responseDecoder = responseDecoder
     }
     
     func makeRequest(endpoint: Endpoint, completion: @escaping (ReturnType?, WebServiceError?)-> Void) {
@@ -31,9 +49,7 @@ class WebService<ReturnType: Decodable, Endpoint: BaseEndpoint> {
             return
         }
         
-        manager.request(url, method: endpoint.getHTTPMethod(), parameters: nil, encoding: URLEncoding.default, headers: endpoint.getHeaders(), interceptor: nil).response {
-            
-            response in
+        manager.request(url, method: endpoint.getHTTPMethod(), parameters: nil, encoding: URLEncoding.default, headers: endpoint.getHeaders(), interceptor: nil).response { response in
             
             switch response.result {
             case .success(let data):
@@ -44,7 +60,7 @@ class WebService<ReturnType: Decodable, Endpoint: BaseEndpoint> {
                     return
                 }
                 
-                guard let result = try? JSONDecoder().decode(ReturnType.self, from: data) else {
+                guard let result = self.responseDecoder.decode(data: data) as? ReturnType else {
                     DispatchQueue.main.async {
                         completion(nil, .unexpectedResponseFormat)
                     }
@@ -61,36 +77,4 @@ class WebService<ReturnType: Decodable, Endpoint: BaseEndpoint> {
             }
         }
     }
-    
-    func makeRequestForImage(endpoint: Endpoint, completion: @escaping (Data?, WebServiceError?)-> Void) {
-        
-        guard let url = try? endpoint.getURL() else {
-            completion(nil, .buildingEndpointFailed)
-            return
-        }
-        
-        manager.request(url, method: endpoint.getHTTPMethod(), parameters: nil, encoding: URLEncoding.default, headers: endpoint.getHeaders(), interceptor: nil).response {
-            
-            response in
-            
-            switch response.result {
-            case .success(let data):
-                guard let data = data else {
-                    DispatchQueue.main.async {
-                        completion(nil, .emptyResponse)
-                    }
-                    return
-                }
-                DispatchQueue.main.async {
-                    completion(data, nil)
-                }
-            case .failure(_):
-                DispatchQueue.main.async {
-                    completion(nil, .unexpectedError)
-                }
-            }
-        }
-        
-    }
-    
 }

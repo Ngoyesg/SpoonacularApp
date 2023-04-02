@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AllRecipesAPI: Codable {
+struct AllRecipesAPI: Codable, DecodableAPIResponse {
 
   var results      : [RecipesAPI]? = []
   var offset       : Int?       = nil

@@ -8,7 +8,7 @@
 import Foundation
 
 struct FavoriteRecipe {
-    var id: Int? = nil
-    var title: String? = nil
+    var id: Int
+    var title: String
     var image: Data? = nil
 }

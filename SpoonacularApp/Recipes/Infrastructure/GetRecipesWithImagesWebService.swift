@@ -13,14 +13,13 @@ protocol GetRecipesWithImageWebServiceProtocol: AnyObject {
 
 class GetRecipesWithImagesWebService {
     
-    private var getRecipesService: GetRecipesWebServiceProtocol
-    private var getImageService: ImageWebServiceProtocol
-    private var mapperFromRecipeService: RecipesToRecipesWithImagesProtocol
+    private let getRecipesService: GetRecipesWebServiceProtocol
+    private let getImageService: ImageWebServiceProtocol
+    private let mapperFromRecipeService: RecipesToRecipesWithImagesProtocol
     
     private var recipesToReturn : [RecipeWithImageModel] = []
     private let dispatchGroup = DispatchGroup()
     private let dispatchQueue = DispatchQueue(label: "RecipesWithImagesQueue")
-    private var error: Bool = false
     
     init(getRecipesService: GetRecipesWebServiceProtocol, getImageService: ImageWebServiceProtocol, mapperFromRecipeService: RecipesToRecipesWithImagesProtocol) {
         self.getRecipesService = getRecipesService
@@ -33,9 +32,7 @@ class GetRecipesWithImagesWebService {
 extension GetRecipesWithImagesWebService: GetRecipesWithImageWebServiceProtocol {
     
     func getRecipesWithThumbnails(from recipes: AllRecipesModel, completion: @escaping (AllRecipesModel?, [RecipeWithImageModel]?, WebServiceError?) -> Void) {
-        
-        error = false
-        
+                
         recipes.recipes?.forEach { recipe in
             self.dispatchQueue.async {
                 self.dispatchGroup.enter()
@@ -46,8 +43,6 @@ extension GetRecipesWithImagesWebService: GetRecipesWithImageWebServiceProtocol 
                 }
                 self.getImageService.getImage(for: imageURL) { [weak self] imageData, error in
                     guard let self = self else {
-                        self?.error = true
-                        self?.dispatchGroup.leave()
                         return
                     }
                     
@@ -55,10 +50,7 @@ extension GetRecipesWithImagesWebService: GetRecipesWithImageWebServiceProtocol 
                         let recipeWithImage = self.mapperFromRecipeService.mapWithImageData(from: recipe, and: nil)
                         self.recipesToReturn.append(recipeWithImage)
                         self.dispatchGroup.leave()
-                    }
-                    
-                    if let image = imageData {
-                        self.error = false
+                    } else if let image = imageData {
                         let recipeWithImage = self.mapperFromRecipeService.mapWithImageData(from: recipe, and: image)
                         self.recipesToReturn.append(recipeWithImage)
                         self.dispatchGroup.leave()
@@ -70,11 +62,7 @@ extension GetRecipesWithImagesWebService: GetRecipesWithImageWebServiceProtocol 
         dispatchGroup.notify(queue: dispatchQueue) {
             
             DispatchQueue.main.async {
-                if self.error {
-                    completion(nil, nil, .unexpectedError)
-                } else {
-                    completion(recipes, self.recipesToReturn, nil)
-                }
+                completion(recipes, self.recipesToReturn, nil)
             }
             
         }

@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol FilteringUseCaseProtocol: AnyObject {
+protocol FilteringUseCaseStepProtocol: AnyObject {
     func getRecipesToDisplay(search keywords: String, completion: @escaping (AllRecipesModel?, [RecipeWithImageModel]?, WebServiceError?) -> Void)
 }
 
-class FilteringUseCase {
+class FilteringUseCaseStep {
     
     private let filteredRecipesRetrieverService: FilteredRecipesWebServiceProtocol
     private let imagesRetrieverService: GetRecipesWithImageWebServiceProtocol
@@ -22,7 +22,7 @@ class FilteringUseCase {
     }
 }
 
-extension FilteringUseCase: FilteringUseCaseProtocol {
+extension FilteringUseCaseStep: FilteringUseCaseStepProtocol {
     func getRecipesToDisplay(search keywords: String, completion: @escaping (AllRecipesModel?, [RecipeWithImageModel]?, WebServiceError?) -> Void) {
         
         filteredRecipesRetrieverService.getFilteredRecipes(for: keywords) { [weak self] allrecipes, error in

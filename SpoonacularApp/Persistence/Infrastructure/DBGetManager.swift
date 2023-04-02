@@ -2,23 +2,31 @@
 //  DBGetManager.swift
 //  SpoonacularApp
 //
-//  Created by Natalia Goyes on 29/03/23.
+//  Created by Natalia Goyes on 1/04/23.
 //
 
 import Foundation
 
 protocol DBGetManagerProtocol: AnyObject {
-    func getAll() throws -> [FavoriteRecipe]
+    func getById(id: Int) throws -> FavoriteRecipe
 }
 
 class DBGetManager: DBManager, DBGetManagerProtocol {
     
-    func getAll() throws -> [FavoriteRecipe] {
-        let results = realm.objects(FavoriteRecipeObject.self).toArray(ofType: FavoriteRecipe.self)
-        if results.count == 0 {
-            throw DBManagerError.unableToRetriveData
+    let converter: FavoriteRecipeFromObjectProtocol
+    init(converter: FavoriteRecipeFromObjectProtocol) {
+        self.converter = converter
+    }
+    
+    func getById(id: Int) throws -> FavoriteRecipe {
+        do {
+            guard let object = realm.objects(FavoriteRecipeObject.self).filter("id = %d", id).first else {
+                throw DBManagerError.objectNotFound
+            }
+            let recipe = converter.convert(object)
+            return recipe
+        } catch {
+            throw DBManagerError.unableToDeleteObject
         }
-        return results
     }
 }
- 

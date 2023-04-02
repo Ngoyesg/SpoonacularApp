@@ -17,6 +17,7 @@ class FilteredRecipesWebService: WebService<FilteredRecipesAPI, FilteredRecipesE
     
     init(converter: FilteredRecipesAPIToModelMapProtocol) {
         self.converter = converter
+        super.init(responseDecoder: AnyResponseDecoder<FilteredRecipesAPI>())
     }
     
     func getFilteredRecipes(for keyword: String, completion: @escaping (AllRecipesModel?, WebServiceError?)-> Void) {

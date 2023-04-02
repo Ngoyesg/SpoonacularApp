@@ -17,6 +17,7 @@ class DetailedRecipeWebService: WebService<DetailedRecipeAPI, DetailedRecipeEndp
     
     init(converter: DetailedRecipeAPIToModelMapProtocol) {
         self.converter = converter
+        super.init(responseDecoder: AnyResponseDecoder<DetailedRecipeAPI>())
     }
     
     func getDetails(for id: Int, with nutrition: Bool, completion: @escaping (DetailedRecipeModel?, WebServiceError?)-> Void) {

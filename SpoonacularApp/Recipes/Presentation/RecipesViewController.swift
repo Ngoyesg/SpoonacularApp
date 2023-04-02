@@ -10,6 +10,7 @@ import UIKit
 protocol RecipesViewControllerProtocol: AnyObject {
     func alertProcessStatus(for process: RecipesUseCase, status: RecipesUseCaseStatus)
     func reloadTable()
+    func reloadRow(at index: Int)
     func startSpinner()
     func stopSpinner()
     func setIDToSend(with id: Int)
@@ -29,7 +30,6 @@ class RecipesViewController: UIViewController {
     struct Constant {
         static let tableViewCellIdentifier = "RecipeCell"
         static let segueToRecipeDetails = "ToRecipeDetails"
-        static let rowHeight = 110.0
     }
     
     override func viewDidLoad() {
@@ -61,6 +61,11 @@ class RecipesViewController: UIViewController {
 }
 
 extension RecipesViewController: RecipesViewControllerProtocol {
+    func reloadRow(at index: Int) {
+        tableView.performBatchUpdates {
+            tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        }
+    }
     
     func alertProcessStatus(for process: RecipesUseCase, status: RecipesUseCaseStatus) {
         let message = "\(process.rawValue) \(status.rawValue.lowercased())"
@@ -102,25 +107,11 @@ extension RecipesViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: Constant.tableViewCellIdentifier, for: indexPath) as! RecipeCellProtocol
                 
-        let recipe = presenter?.getRecipeForRow(at: indexPath.row)
-        
-//        var content = cell.defaultContentConfiguration()
-//
-//        content.text = recipe?.title
-//        content.textProperties.numberOfLines = 0
-//
-//        content.secondaryText = (recipe?.isFavorite ?? false ) ? "􀊵" : nil
-//
-//        if let image = recipe?.image {
-//            content.image = UIImage(data: image)
-//        } else {
-//            content.image = UIImage(systemName: "questionmark.square")
-//        }
-//
-//        cell.contentConfiguration = content
-        cell.setTitle(recipe?.title)
-        cell.setImage(recipe?.image)
-        cell.toggleFavoriteStatus(to: recipe?.isFavorite ?? false)
+        if let recipe = presenter?.getRecipeForRow(at: indexPath.row) {
+            cell.setTitle(recipe.title)
+            cell.setImage(recipe.image)
+            cell.toggleFavoriteStatus(to: recipe.isFavorite)
+        }
         return cell
     }
     
@@ -130,29 +121,37 @@ extension RecipesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let addToFavorites = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, completionHandler) in
-            guard let self = self else {
-                return
-            }
-            self.presenter?.handleAddToFavorites(at: indexPath.row)
-            completionHandler(true)
+        
+        guard let recipe = presenter?.getRecipeForRow(at: indexPath.row) else {
+            return nil
         }
-        
-        addToFavorites.image = UIImage(systemName: "star.fill")
-        addToFavorites.backgroundColor = .systemYellow
-        
-        let deleteFromFavorites = UIContextualAction(style: .destructive, title: "RemoveFavorite") { [weak self] (action, view, completionHandler) in
-            guard let self = self else {
-                return
+                
+        if recipe.isFavorite {
+            
+            let deleteFromFavorites = UIContextualAction(style: .destructive, title: "RemoveFavorite") { [weak self] (action, view, completionHandler) in
+                guard let self = self else {
+                    return
+                }
+                self.presenter?.handleDeleteFromFavorites(at: indexPath.row)
+                completionHandler(true)
             }
-            self.presenter?.handleDeleteFromFavorites(at: indexPath.row)
-            completionHandler(true)
+            deleteFromFavorites.image = UIImage(systemName: "star.slash")
+            
+            return UISwipeActionsConfiguration(actions: [deleteFromFavorites])
+        } else {
+            
+            let addToFavorites = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, completionHandler) in
+                guard let self = self else {
+                    return
+                }
+                self.presenter?.handleAddToFavorites(at: indexPath.row)
+                completionHandler(true)
+            }
+            
+            addToFavorites.image = UIImage(systemName: "star.fill")
+            addToFavorites.backgroundColor = .systemYellow
+            
+            return UISwipeActionsConfiguration(actions: [addToFavorites])
         }
-        deleteFromFavorites.image = UIImage(systemName: "star.slash")
-        
-        let configuration = UISwipeActionsConfiguration(actions: [addToFavorites, deleteFromFavorites])
-
-        return configuration
     }
-    
 }

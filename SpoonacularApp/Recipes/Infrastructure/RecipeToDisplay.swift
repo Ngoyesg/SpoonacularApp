@@ -9,7 +9,7 @@ import Foundation
 
 struct RecipeToDisplay {
     
-    var id: Int?    = nil
+    var id: Int
     var title: String? = nil
     var image: Data? = nil
     var isFavorite: Bool = false

@@ -8,14 +8,14 @@
 import Foundation
 import RealmSwift
 
-@objcMembers class FavoriteRecipeObject: Object {
-    dynamic var id: Int!
-    dynamic var title: String!
-    dynamic var image: Data!
-//    
-//    override static func primaryKey() -> String? {
-//        return "id"
-//    }
+class FavoriteRecipeObject: Object {
+    @objc dynamic var id: Int = 0
+    @objc dynamic var title: String = ""
+    @objc dynamic var image: Data?
+
+    override static func primaryKey() -> String? {
+       return "id"
+   }
 }
 
 

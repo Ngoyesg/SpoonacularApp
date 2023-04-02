@@ -17,6 +17,7 @@ class GetRecipesWebService: WebService<AllRecipesAPI, AllRecipesEndpoint>, GetRe
     
     init(converter: AllRecipesAPIToModelMapProtocol) {
         self.converter = converter
+        super.init(responseDecoder: AnyResponseDecoder<AllRecipesAPI>())
     }
     
     func getAllRecipes(from offset: Int, to number: Int, completion: @escaping (AllRecipesModel?, WebServiceError?)-> Void){

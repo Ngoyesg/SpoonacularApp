@@ -20,15 +20,11 @@ class ImageWebService: WebService<Data, ImageRecipeEndpoint>, ImageWebServicePro
             return
         }
         
-        makeRequestForImage(endpoint: endpoint) { [weak self] results, error in
-            
-            guard let _ = self else {
-                completion(nil, .unexpectedError)
-                return
-            }
+        makeRequest(endpoint: endpoint) { results, error in
             
             if error != nil {
                 completion(nil, .unexpectedError)
+                return
             }
             
             completion(results, nil)
