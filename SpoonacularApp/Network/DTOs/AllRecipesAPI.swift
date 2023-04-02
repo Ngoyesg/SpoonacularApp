@@ -9,20 +9,13 @@ import Foundation
 
 struct AllRecipesAPI: Codable, DecodableAPIResponse {
 
-  var results      : [RecipesAPI]? = []
-  var offset       : Int?       = nil
-  var number       : Int?       = nil
-  var totalResults : Int?       = nil
-
-  enum CodingKeys: String, CodingKey {
-
-    case results      = "results"
-    case offset       = "offset"
-    case number       = "number"
-    case totalResults = "totalResults"
-  
-  }
-
+    let results: [RecipesAPI]?
+    let offset: Int?
+    let number: Int?
+    let totalResults : Int?
+    let message: String?
+    let status: String?
+    let code: Int?
 }
 
 extension AllRecipesAPI {

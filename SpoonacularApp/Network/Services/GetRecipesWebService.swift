@@ -34,17 +34,25 @@ class GetRecipesWebService: WebService<AllRecipesAPI, AllRecipesEndpoint>, GetRe
                 return
             }
             
-            if error != nil {
+            if error != nil  {
                 completion(nil, .unexpectedError)
                 return
             }
             
-            if let results = results {
-                let transformedData = self.converter.convert(results)
-                completion(transformedData, nil)
+            guard let results = results else {
+                completion(nil, .unexpectedError)
                 return
             }
             
+            if results.status == "failure" {
+                print(results.message)
+                completion(nil, .exceededNumberOfAPIKeyCalls)
+                return
+            }
+            
+            let transformedData = self.converter.convert(results)
+            completion(transformedData, nil)
+            return
         }
     }
 }

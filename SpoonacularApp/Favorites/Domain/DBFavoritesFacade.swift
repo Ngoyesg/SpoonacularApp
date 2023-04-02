@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DBFavoritesFacadeProtocol: AnyObject {
-    func listAll(completion: @escaping(([RecipeToDisplay]?, DBManagerError?) -> Void))
+    func listAll(completion: @escaping(([RecipeToDisplay]) -> Void))
     func delete(_ recipeWithImageData: RecipeToDisplay, completion: @escaping((DBManagerResultStatus?, DBManagerError?) -> Void))
     func deleteAll(completion: @escaping((DBManagerResultStatus?, DBManagerError?) -> Void))
 }
@@ -28,13 +28,9 @@ class DBFavoritesFacade {
 extension DBFavoritesFacade: DBFavoritesFacadeProtocol {
     
     
-    func listAll(completion: @escaping (([RecipeToDisplay]?, DBManagerError?) -> Void)) {
-        listFavoriteUseCase.listAll { recipes, error in
-            if error != nil {
-                completion(nil, .unableToDeleteObject)
-                return
-            }
-            completion(recipes, nil)
+    func listAll(completion: @escaping (([RecipeToDisplay]) -> Void)) {
+        listFavoriteUseCase.listAll { recipes in
+            completion(recipes)
         }
     }
     

@@ -29,9 +29,10 @@ struct DetailedRecipeModel {
     var title: String?
     
     var sourceUrl: String?
-    
-    var image: String?
-    
+        
     var instructions: String?
     
+    var readyInMinutes: Int?
+    
+    var servings: Int?
 }

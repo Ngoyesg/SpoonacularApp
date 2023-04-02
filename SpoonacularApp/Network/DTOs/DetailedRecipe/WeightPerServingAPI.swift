@@ -3,7 +3,7 @@ import Foundation
 
 struct WeightPerServingAPI: Codable {
 
-  var amount : Int?    = nil
+  var amount : Double?    = nil
   var unit   : String? = nil
 
   enum CodingKeys: String, CodingKey {
@@ -16,7 +16,7 @@ struct WeightPerServingAPI: Codable {
   init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
 
-    amount = try values.decodeIfPresent(Int.self    , forKey: .amount )
+    amount = try values.decodeIfPresent(Double.self    , forKey: .amount )
     unit   = try values.decodeIfPresent(String.self , forKey: .unit   )
  
   }

@@ -10,16 +10,18 @@ import UIKit
 protocol FavoritesViewControllerProtocol: AnyObject {
     func alertProcessStatus(for process: FavoritesUseCases, status: FavoritesUseCasesStatus)
     func reloadTable()
-    func reloadRow(at index: Int)
+    func removeRow(at index: Int)
     func startSpinner()
     func stopSpinner()
+    func enableEmptyState()
+    func disableEmptyState()
 }
 
 class FavoritesViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
-    
+    @IBOutlet weak var emptyResultsView: UIView!
     
     var presenter: FavoritesPresenterProtocol?
     var idToSend: Int?
@@ -35,9 +37,12 @@ class FavoritesViewController: UIViewController {
         tableView.dataSource = self
         presenter = FavoritesPresenterBuilder().build()
         presenter?.setController(self)
-        self.presenter?.listAllRecipes()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.presenter?.listAllRecipes()
+    }
     
     @IBAction func onDeleteAllButtonTapped(_ sender: Any) {
         alertDeletion()
@@ -53,14 +58,12 @@ class FavoritesViewController: UIViewController {
         alert.addAction(cancelAction)
         self.present(alert, animated: true)
     }
-    
-    
 }
 
 extension FavoritesViewController: FavoritesViewControllerProtocol {
-    func reloadRow(at index: Int) {
+    func removeRow(at index: Int) {
         tableView.performBatchUpdates {
-            tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+            tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         }
     }
     
@@ -117,5 +120,19 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         deleteFromFavorites.image = UIImage(systemName: "star.slash")
         
         return UISwipeActionsConfiguration(actions: [deleteFromFavorites])
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        110
+    }
+    
+    func enableEmptyState() {
+        tableView.isHidden = true
+        emptyResultsView.isHidden = false
+    }
+    
+    func disableEmptyState() {
+        tableView.isHidden = false
+        emptyResultsView.isHidden = true
     }
 }

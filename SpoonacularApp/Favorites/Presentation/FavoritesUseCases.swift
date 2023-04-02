@@ -8,9 +8,9 @@
 import Foundation
 
 enum FavoritesUseCases: String {
-    case fetching = "Fetching favorites done"
-    case deleteOne = "Deleting favorite done"
-    case deleteAll = "Deleting all favorites done"
+    case fetching = "Fetching favorites"
+    case deleteOne = "Deleting favorite"
+    case deleteAll = "Deleting all favorites"
 }
 
 enum FavoritesUseCasesStatus: String {

@@ -13,7 +13,7 @@ protocol RecipesViewControllerProtocol: AnyObject {
     func reloadRow(at index: Int)
     func startSpinner()
     func stopSpinner()
-    func setIDToSend(with id: Int)
+    func setRecipeToSend(with recipe: RecipeToDisplay)
     func goToRecipeDetailsController()
 }
 
@@ -25,7 +25,7 @@ class RecipesViewController: UIViewController {
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
     var presenter: RecipesPresenterProtocol?
-    var idToSend: Int?
+    var recipeToSend: RecipeToDisplay?
 
     struct Constant {
         static let tableViewCellIdentifier = "RecipeCell"
@@ -38,15 +38,16 @@ class RecipesViewController: UIViewController {
         tableView.dataSource = self
         presenter = RecipesPresenterBuilder().build()
         presenter?.setController(self)
-        self.presenter?.fetchAllRecipes()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.presenter?.fetchAllRecipes()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.presenter?.restartFetchingHistory()
+        super.viewWillDisappear(animated)
     }
     
     @IBAction func onSearchRecipeButtonTapped(){
@@ -54,8 +55,8 @@ class RecipesViewController: UIViewController {
     }
         
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? DetailsViewControllerProtocol, let idToSend = idToSend {
-            destination.receive(id: idToSend)
+        if let destination = segue.destination as? DetailsViewControllerProtocol, let recipeToSend = recipeToSend {
+            destination.receive(recipe: recipeToSend)
         }
     }
 }
@@ -84,8 +85,8 @@ extension RecipesViewController: RecipesViewControllerProtocol {
         spinner.stopAnimating()
     }
     
-    func setIDToSend(with id: Int) {
-        self.idToSend = id
+    func setRecipeToSend(with recipe: RecipeToDisplay) {
+        self.recipeToSend = recipe
     }
     
     func goToRecipeDetailsController() {
@@ -153,5 +154,9 @@ extension RecipesViewController: UITableViewDelegate, UITableViewDataSource {
             
             return UISwipeActionsConfiguration(actions: [addToFavorites])
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 110.0
     }
 }

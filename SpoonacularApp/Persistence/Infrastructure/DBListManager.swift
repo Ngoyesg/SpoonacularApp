@@ -8,17 +8,19 @@
 import Foundation
 
 protocol DBListManagerProtocol: AnyObject {
-    func getAll() throws -> [FavoriteRecipe]
+    func getAll() -> [FavoriteRecipe]
 }
 
 class DBListManager: DBManager, DBListManagerProtocol {
     
-    func getAll() throws -> [FavoriteRecipe] {
-        let results = realm.objects(FavoriteRecipeObject.self).toArray(ofType: FavoriteRecipe.self)
-        if results.count == 0 {
-            throw DBManagerError.unableToRetriveData
+    let converter = FavoriteRecipeFromObject()
+    
+    func getAll() -> [FavoriteRecipe] {
+        let realmObjects = realm.objects(FavoriteRecipeObject.self)
+        let results = realmObjects.toArray()
+        return results.map {
+            converter.convert($0)
         }
-        return results
     }
 }
  

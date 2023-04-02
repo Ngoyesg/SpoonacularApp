@@ -28,15 +28,16 @@ class FavoritesPresenter {
     
     var recipesToDisplay: [RecipeToDisplay] = []
     
-    func processRecipesResponse(useCase: FavoritesUseCases ,recipes: [RecipeToDisplay]?) {
-        guard let recipes = recipes else {
-            self.controller?.stopSpinner()
-            self.controller?.alertProcessStatus(for: useCase, status: .failure)
-            return
-        }
-        self.updateData(recipes: recipes)
+    func processRecipesResponse(useCase: FavoritesUseCases, recipes: [RecipeToDisplay]) {
         self.controller?.stopSpinner()
+        self.updateData(recipes: recipes)
         self.controller?.reloadTable()
+        
+        if (recipes.isEmpty) {
+            controller?.enableEmptyState()
+        } else {
+            controller?.disableEmptyState()    
+        }
     }
     
     func updateData(recipes: [RecipeToDisplay]){
@@ -69,12 +70,11 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     
     func listAllRecipes(){
         controller?.startSpinner()
-        dbFavoritesFacade.listAll(completion: { [weak self] recipes, error in
+        dbFavoritesFacade.listAll(completion: { [weak self] recipes in
             guard let self = self else {
                 return
             }
             self.processRecipesResponse(useCase: .fetching, recipes: recipes)
-            self.controller?.stopSpinner()
         })
     }
     
@@ -85,8 +85,8 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
                 return
             }
             if (status == .success) {
-                self.recipesToDisplay[index].updateRecipeFavoriteStatus(status: false)
-                self.controller?.reloadRow(at: index)
+                self.recipesToDisplay.remove(at: index)
+                self.controller?.removeRow(at: index)
             }
             self.processModifyingFavoriteStatus(useCase: .deleteOne, status: status ?? .failure)
         }
@@ -98,6 +98,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
                 return
             }
             if (status == .success) {
+                self.recipesToDisplay = []
                 self.controller?.reloadTable()
             }
             self.processModifyingFavoriteStatus(useCase: .deleteAll, status: status ?? .failure)

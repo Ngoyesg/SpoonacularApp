@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ListFavoritesUseCaseProtocol: AnyObject {
-    func listAll(completion: @escaping(([RecipeToDisplay]?, DBManagerError?) -> Void))
+    func listAll(completion: @escaping(([RecipeToDisplay]) -> Void))
 }
 
 class ListFavoritesUseCase {
@@ -27,16 +27,12 @@ class ListFavoritesUseCase {
  
 extension ListFavoritesUseCase: ListFavoritesUseCaseProtocol{
     
-    func listAll(completion: @escaping(([RecipeToDisplay]?, DBManagerError?) -> Void)) {        
-        do {
-            let favorites = try dbManagerListService.getAll()
-            let recipes = favorites.map { favorite in
-                mapFavoriteToRecipe(favorite)
-            }
-            completion(recipes, nil)
-        } catch {
-            completion(nil, .unableToAddObject)
+    func listAll(completion: @escaping(([RecipeToDisplay]) -> Void)) {
+        let favorites = dbManagerListService.getAll()
+        let recipes = favorites.map { favorite in
+            mapFavoriteToRecipe(favorite)
         }
+        completion(recipes)
     }
     
 }

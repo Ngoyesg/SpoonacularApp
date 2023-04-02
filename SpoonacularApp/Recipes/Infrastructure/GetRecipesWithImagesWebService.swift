@@ -34,13 +34,14 @@ extension GetRecipesWithImagesWebService: GetRecipesWithImageWebServiceProtocol 
     func getRecipesWithThumbnails(from recipes: AllRecipesModel, completion: @escaping (AllRecipesModel?, [RecipeWithImageModel]?, WebServiceError?) -> Void) {
                 
         recipes.recipes?.forEach { recipe in
+            guard let imageURL = recipe.image else {
+                completion(nil, nil, .unexpectedError)
+                return
+            }
+            
             self.dispatchQueue.async {
                 self.dispatchGroup.enter()
-                guard let imageURL = recipe.image else {
-                    completion(nil, nil, .unexpectedError)
-                    self.dispatchGroup.leave()
-                    return
-                }
+            
                 self.getImageService.getImage(for: imageURL) { [weak self] imageData, error in
                     guard let self = self else {
                         return

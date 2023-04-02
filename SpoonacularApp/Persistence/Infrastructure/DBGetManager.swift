@@ -26,7 +26,7 @@ class DBGetManager: DBManager, DBGetManagerProtocol {
             let recipe = converter.convert(object)
             return recipe
         } catch {
-            throw DBManagerError.unableToDeleteObject
+            throw DBManagerError.objectNotFound
         }
     }
 }

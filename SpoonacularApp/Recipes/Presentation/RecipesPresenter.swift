@@ -45,7 +45,6 @@ class RecipesPresenter {
             guard let self = self else {
                 return
             }
-            
             self.processRecipesResponse(generalInfo: generalInfo, recipes: recipes)
         }
     }
@@ -56,7 +55,6 @@ class RecipesPresenter {
             self.controller?.alertProcessStatus(for: .downloading, status: .failure)
             return
         }
-        
         self.updateData(information: generalInfo, recipes: recipes)
         self.controller?.stopSpinner()
         self.controller?.reloadTable()
@@ -67,7 +65,6 @@ class RecipesPresenter {
             guard let self = self else {
                 return
             }
-            
             self.processRecipesResponse(generalInfo: generalInfo, recipes: recipes)
         }
     }
@@ -97,8 +94,8 @@ extension RecipesPresenter: RecipesPresenterProtocol {
     }
     
     func recipeWasSelected(at row: Int) {
-        let recipeToSend = recipesToDisplay[row].id
-        controller?.setIDToSend(with: recipeToSend)
+        let recipeToSend = recipesToDisplay[row]
+        controller?.setRecipeToSend(with: recipeToSend)
         controller?.goToRecipeDetailsController()
     }
     
@@ -107,7 +104,6 @@ extension RecipesPresenter: RecipesPresenterProtocol {
         limitNumber = 25
         recipesToDisplay = []
     }
-    
     
     func procesOnSearchFilteredRecipeTapped(with keywords: String?) {
         controller?.startSpinner()

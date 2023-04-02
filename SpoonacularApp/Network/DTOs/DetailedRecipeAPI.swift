@@ -28,7 +28,6 @@ struct DetailedRecipeAPI: Codable, DecodableAPIResponse {
     var license                  : String?                = nil
     var sourceName               : String?                = nil
     var pricePerServing          : Double?                = nil
-    var extendedIngredients      : [ExtendedIngredientsAPI]? = []
     var id                       : Int?                   = nil
     var title                    : String?                = nil
     var readyInMinutes           : Int?                   = nil
@@ -42,9 +41,7 @@ struct DetailedRecipeAPI: Codable, DecodableAPIResponse {
     var dishTypes                : [String]?              = []
     var diets                    : [String]?              = []
     var occasions                : [String]?              = []
-    var winePairing              : WinePairingAPI?           = WinePairingAPI()
     var instructions             : String?                = nil
-    var analyzedInstructions     : [String]?              = []
     var originalId               : String?                = nil
     var spoonacularSourceUrl     : String?                = nil
     
@@ -69,7 +66,6 @@ struct DetailedRecipeAPI: Codable, DecodableAPIResponse {
         case license                  = "license"
         case sourceName               = "sourceName"
         case pricePerServing          = "pricePerServing"
-        case extendedIngredients      = "extendedIngredients"
         case id                       = "id"
         case title                    = "title"
         case readyInMinutes           = "readyInMinutes"
@@ -83,9 +79,7 @@ struct DetailedRecipeAPI: Codable, DecodableAPIResponse {
         case dishTypes                = "dishTypes"
         case diets                    = "diets"
         case occasions                = "occasions"
-        case winePairing              = "winePairing"
         case instructions             = "instructions"
-        case analyzedInstructions     = "analyzedInstructions"
         case originalId               = "originalId"
         case spoonacularSourceUrl     = "spoonacularSourceUrl"
         

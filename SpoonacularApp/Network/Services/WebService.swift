@@ -14,7 +14,7 @@ struct ContentTypeHeaders {
 }
 
 enum WebServiceError: Error {
-    case unableToFetchData, buildingEndpointFailed, unexpectedResponseFormat, emptyResponse, unexpectedError
+    case unableToFetchData, buildingEndpointFailed, unexpectedResponseFormat, emptyResponse, unexpectedError, exceededNumberOfAPIKeyCalls
 }
 
 protocol APIResponseDecodable {
@@ -22,8 +22,16 @@ protocol APIResponseDecodable {
 }
 
 class AnyResponseDecoder<ReturnType: Decodable>: APIResponseDecodable {
+    private let jsonDecoder = JSONDecoder()
+    
     func decode(data: Data) -> Any? {
-        try? JSONDecoder().decode(ReturnType.self, from: data)
+        do {
+            return try jsonDecoder.decode(ReturnType.self, from: data)
+        } catch {
+            let error = error as! NSError
+            print(error.userInfo)
+            return nil
+        }
     }
 }
 

@@ -4,7 +4,7 @@ import Foundation
 struct NutrientsAPI: Codable {
 
   var name                : String? = nil
-  var amount              : Int?    = nil
+  var amount              : Double?    = nil
   var unit                : String? = nil
   var percentOfDailyNeeds : Double? = nil
 
@@ -21,7 +21,7 @@ struct NutrientsAPI: Codable {
     let values = try decoder.container(keyedBy: CodingKeys.self)
 
     name                = try values.decodeIfPresent(String.self , forKey: .name                )
-    amount              = try values.decodeIfPresent(Int.self    , forKey: .amount              )
+    amount              = try values.decodeIfPresent(Double.self    , forKey: .amount              )
     unit                = try values.decodeIfPresent(String.self , forKey: .unit                )
     percentOfDailyNeeds = try values.decodeIfPresent(Double.self , forKey: .percentOfDailyNeeds )
  

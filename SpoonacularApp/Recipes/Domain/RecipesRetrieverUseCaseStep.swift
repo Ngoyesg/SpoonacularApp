@@ -30,7 +30,6 @@ extension RecipesRetrieverUseCaseStep: RecipesRetrieverUseCaseStepProtocol {
         recipesRetrieverService.getAllRecipes(from: offset, to: number) {  [weak self] allrecipes, error in
             
             guard let self = self else {
-                completion(nil, nil, .unexpectedError)
                 return
             }
             

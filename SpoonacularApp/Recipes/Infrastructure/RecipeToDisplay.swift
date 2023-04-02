@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecipeToDisplay {
+struct RecipeToDisplay: Codable {
     
     var id: Int
     var title: String? = nil
