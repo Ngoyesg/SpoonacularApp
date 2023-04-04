@@ -12,6 +12,8 @@
 		B9117BED29D9E4AD00ED34B3 /* FakeFetchRecipesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9117BEC29D9E4AD00ED34B3 /* FakeFetchRecipesUseCase.swift */; };
 		B91E245A29D7771000009FA4 /* RecipeToDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E245929D7771000009FA4 /* RecipeToDisplay.swift */; };
 		B91E245C29D777DF00009FA4 /* MapRecipeToDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E245B29D777DF00009FA4 /* MapRecipeToDisplay.swift */; };
+		B929230629DA3E24009D9EBA /* GetRecipesWebServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929230529DA3E24009D9EBA /* GetRecipesWebServiceTests.swift */; };
+		B929230829DA3EB8009D9EBA /* AllRecipesAPIToModelMapMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929230729DA3EB8009D9EBA /* AllRecipesAPIToModelMapMock.swift */; };
 		B93DD78B29D49DAB0098B2D7 /* DBAddManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93DD78A29D49DAB0098B2D7 /* DBAddManager.swift */; };
 		B93DD78D29D49F8C0098B2D7 /* DBListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93DD78C29D49F8C0098B2D7 /* DBListManager.swift */; };
 		B93DD78F29D49FCE0098B2D7 /* DBDeleteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93DD78E29D49FCE0098B2D7 /* DBDeleteManager.swift */; };
@@ -129,6 +131,8 @@
 		B9117BEC29D9E4AD00ED34B3 /* FakeFetchRecipesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeFetchRecipesUseCase.swift; sourceTree = "<group>"; };
 		B91E245929D7771000009FA4 /* RecipeToDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeToDisplay.swift; sourceTree = "<group>"; };
 		B91E245B29D777DF00009FA4 /* MapRecipeToDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRecipeToDisplay.swift; sourceTree = "<group>"; };
+		B929230529DA3E24009D9EBA /* GetRecipesWebServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRecipesWebServiceTests.swift; sourceTree = "<group>"; };
+		B929230729DA3EB8009D9EBA /* AllRecipesAPIToModelMapMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipesAPIToModelMapMock.swift; sourceTree = "<group>"; };
 		B93DD78A29D49DAB0098B2D7 /* DBAddManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBAddManager.swift; sourceTree = "<group>"; };
 		B93DD78C29D49F8C0098B2D7 /* DBListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBListManager.swift; sourceTree = "<group>"; };
 		B93DD78E29D49FCE0098B2D7 /* DBDeleteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBDeleteManager.swift; sourceTree = "<group>"; };
@@ -299,6 +303,7 @@
 		B946E47929CE1FED00315FF2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B929230529DA3E24009D9EBA /* GetRecipesWebServiceTests.swift */,
 				B946E49629D0FBF900315FF2 /* WebServiceTests.swift */,
 				B946E48B29D0ED2000315FF2 /* Mocks */,
 				B946E49529D0FBDC00315FF2 /* Endpoints */,
@@ -319,6 +324,7 @@
 			children = (
 				B946E48C29D0ED4B00315FF2 /* MockURLDecomposerProtocol.swift */,
 				B946E49829D0FFF700315FF2 /* MockURLProtocol.swift */,
+				B929230729DA3EB8009D9EBA /* AllRecipesAPIToModelMapMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -843,11 +849,13 @@
 				B946E48529CFC54100315FF2 /* ImageRecipeEndpointTests.swift in Sources */,
 				B946E49729D0FBF900315FF2 /* WebServiceTests.swift in Sources */,
 				B946E49929D0FFF800315FF2 /* MockURLProtocol.swift in Sources */,
+				B929230829DA3EB8009D9EBA /* AllRecipesAPIToModelMapMock.swift in Sources */,
 				B946E48129CFA80D00315FF2 /* FilteredRecipesEndpointTests.swift in Sources */,
 				B946E49229D0F7D300315FF2 /* URLDecomposerTests.swift in Sources */,
 				B946E48D29D0ED4B00315FF2 /* MockURLDecomposerProtocol.swift in Sources */,
 				B946E48F29D0F09100315FF2 /* BaseEndpointTests.swift in Sources */,
 				B946E47D29CFA0C700315FF2 /* AllRecipesEndpointTests.swift in Sources */,
+				B929230629DA3E24009D9EBA /* GetRecipesWebServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

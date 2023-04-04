@@ -28,7 +28,7 @@ class AnyResponseDecoder<ReturnType: Decodable>: APIResponseDecodable {
         do {
             return try jsonDecoder.decode(ReturnType.self, from: data)
         } catch {
-            let error = error as! NSError
+            let error = error as NSError
             print(error.userInfo)
             return nil
         }

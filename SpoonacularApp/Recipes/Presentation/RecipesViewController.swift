@@ -47,6 +47,7 @@ class RecipesViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.presenter?.restartFetchingHistory()
+        self.reloadTable()
         super.viewWillDisappear(animated)
     }
     
