@@ -9,7 +9,7 @@ import Foundation
 
 class DetailsPresenterBuilder {
     
-    func build() -> DetailsPresenter {
+    private func getProductionDetailsUseCase()-> GetDetailsRecipeUseCase {
         
         let mapperModelToDetailedRecipe = MapDetailedRecipe()
         
@@ -17,7 +17,25 @@ class DetailsPresenterBuilder {
         
         let detailedRecipesRetrieverService = DetailedRecipeWebService(converter: converter)
         
-        let getDetailsUseCase = GetDetailsRecipeUseCaseStep(detailedRecipesRetrieverService: detailedRecipesRetrieverService, mapperModelToDetailedRecipe: mapperModelToDetailedRecipe)
+        return GetDetailsRecipeUseCase(detailedRecipesRetrieverService: detailedRecipesRetrieverService, mapperModelToDetailedRecipe: mapperModelToDetailedRecipe)
+    }
+    
+    private func getDevelopmentDetailsUseCase() -> FakeGetDetailsRecipeUseCase {
+        
+        return FakeGetDetailsRecipeUseCase()
+    }
+    
+    func getDetailsUseCase() -> GetDetailsRecipeUseCaseProtocol {
+        #if DEBUG
+            return getDevelopmentDetailsUseCase()
+        #else
+            return getProductionDetailsUseCase()
+        #endif
+    }
+    
+    func build() -> DetailsPresenter {
+        
+        let getDetailsUseCase = getDetailsUseCase()
         
         return DetailsPresenter(getDetailsUseCase: getDetailsUseCase)
         

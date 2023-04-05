@@ -16,9 +16,9 @@ class DetailsPresenter {
     
     weak var controller: DetailsViewControllerProtocol?
     
-    private let getDetailsUseCase: GetDetailsRecipeUseCaseStepProtocol
+    private let getDetailsUseCase: GetDetailsRecipeUseCaseProtocol
     
-    init(getDetailsUseCase: GetDetailsRecipeUseCaseStepProtocol) {
+    init(getDetailsUseCase: GetDetailsRecipeUseCaseProtocol) {
         self.getDetailsUseCase = getDetailsUseCase
     }
         

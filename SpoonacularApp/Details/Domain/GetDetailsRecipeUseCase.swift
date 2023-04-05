@@ -1,5 +1,5 @@
 //
-//  GetDetailsRecipeUseCaseStep.swift
+//  GetDetailsRecipeUseCase.swift
 //  SpoonacularApp
 //
 //  Created by Natalia Goyes on 2/04/23.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol GetDetailsRecipeUseCaseStepProtocol {
+protocol GetDetailsRecipeUseCaseProtocol {
     func getRecipesToDisplay(search id: Int, completion: @escaping (DetailedRecipe?, WebServiceError?) -> Void)
 }
 
-class GetDetailsRecipeUseCaseStep {
+class GetDetailsRecipeUseCase {
     
     private let detailedRecipesRetrieverService: DetailedRecipeWebServiceProtocol
     private let mapperModelToDetailedRecipe: MapDetailedRecipeProtocol
@@ -22,7 +22,7 @@ class GetDetailsRecipeUseCaseStep {
     }
 }
 
-extension GetDetailsRecipeUseCaseStep: GetDetailsRecipeUseCaseStepProtocol {
+extension GetDetailsRecipeUseCase: GetDetailsRecipeUseCaseProtocol {
     func getRecipesToDisplay(search id: Int, completion: @escaping (DetailedRecipe?, WebServiceError?) -> Void) {
         
         detailedRecipesRetrieverService.getDetails(for: id, with: true) { [weak self] detailedRecipe, error in
