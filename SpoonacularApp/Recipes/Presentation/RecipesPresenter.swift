@@ -71,9 +71,7 @@ class RecipesPresenter {
     
     func processModifyingFavoriteStatus(status: DBManagerResultStatus){
         if let status = RecipesUseCaseStatus(rawValue: status.rawValue) {
-            DispatchQueue.main.async {
                 self.controller?.alertProcessStatus(for: .modifying, status: status)
-            }
         }
     }
     
@@ -123,7 +121,7 @@ extension RecipesPresenter: RecipesPresenterProtocol {
                 return
             }
             if (status == .success) {
-                self.recipesToDisplay[index].updateRecipeFavoriteStatus(status: true)
+                self.recipesToDisplay[index].isFavorite = true
                 self.controller?.reloadRow(at: index)
             }
             self.processModifyingFavoriteStatus(status: status)
@@ -137,7 +135,7 @@ extension RecipesPresenter: RecipesPresenterProtocol {
                 return
             }
             if (status == .success) {
-                self.recipesToDisplay[index].updateRecipeFavoriteStatus(status: false)
+                self.recipesToDisplay[index].isFavorite = false
                 self.controller?.reloadRow(at: index)
             }
             self.processModifyingFavoriteStatus(status: status)

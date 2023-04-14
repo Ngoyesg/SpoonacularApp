@@ -30,7 +30,7 @@
         <!--Recipes-->
         <scene sceneID="vuW-tz-Fiv">
             <objects>
-                <viewController id="ATJ-4e-m3s" customClass="RecipesViewController" customModule="SpoonacularApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipesViewController" id="ATJ-4e-m3s" customClass="RecipesViewController" customModule="SpoonacularApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TxO-C0-Gws">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

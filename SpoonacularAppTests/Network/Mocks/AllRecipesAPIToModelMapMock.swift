@@ -10,7 +10,7 @@ import Foundation
 
 class AllRecipesAPIToModelMapMock: AllRecipesAPIToModelMapProtocol {
     func convert(_ input: AllRecipesAPI) -> AllRecipesModel {
-        return AllRecipesModel(recipes: input.recipes., offset: input.offset, number: input.number, totalResults: input.totalResults)
+        return AllRecipesModel(recipes: input.resultstoObject, offset: input.offset, number: input.number, totalResults: input.totalResults)
     }
 
 }

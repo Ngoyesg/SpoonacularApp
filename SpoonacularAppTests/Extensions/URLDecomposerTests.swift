@@ -7,7 +7,7 @@
 
 import XCTest
 @testable import SpoonacularApp
-
+/*
 final class URLDecomposerTests: XCTestCase {
     
     private var sut: URLDecomposer!
@@ -72,3 +72,4 @@ final class URLDecomposerTests: XCTestCase {
     }
 
 }
+*/

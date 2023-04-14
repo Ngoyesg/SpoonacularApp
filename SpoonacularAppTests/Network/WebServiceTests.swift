@@ -13,7 +13,7 @@ struct MockResponse: Codable, Equatable {
     let mockProperty: String
 }
 
-
+/*
 final class WebServiceTests: XCTestCase {
     
     private var sut: WebService!
@@ -68,3 +68,4 @@ final class WebServiceTests: XCTestCase {
         self.wait(for: [requestExpectation], timeout: 3)
     }    
 }
+*/

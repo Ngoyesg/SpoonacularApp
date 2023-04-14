@@ -7,7 +7,7 @@
 
 import Foundation
 @testable import SpoonacularApp
-
+/*
 class MockURLDecomposer: URLDecomposerProtocol {
   
     var caseSuccess: Bool = false
@@ -22,3 +22,4 @@ class MockURLDecomposer: URLDecomposerProtocol {
         }
     }
 }
+*/

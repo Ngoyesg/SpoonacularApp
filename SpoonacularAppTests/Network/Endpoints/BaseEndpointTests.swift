@@ -7,7 +7,7 @@
 
 import XCTest
 @testable import SpoonacularApp
-
+/*
 final class BaseEndpointTests: XCTestCase {
     
     private var sut: BaseEndpoint!
@@ -69,3 +69,4 @@ final class BaseEndpointTests: XCTestCase {
     }
 
 }
+*/

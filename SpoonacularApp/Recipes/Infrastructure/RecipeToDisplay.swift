@@ -7,14 +7,11 @@
 
 import Foundation
 
-struct RecipeToDisplay: Codable {
+struct RecipeToDisplay: Codable, Equatable {
     
     var id: Int
     var title: String? = nil
     var image: Data? = nil
     var isFavorite: Bool = false
- 
-    mutating func updateRecipeFavoriteStatus(status: Bool){
-        self.isFavorite = status
-    }
+    
 }
